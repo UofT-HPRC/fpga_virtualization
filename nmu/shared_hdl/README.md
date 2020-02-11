@@ -1,0 +1,3 @@
+# Network Management Unit
+
+The source files in this directory make up the components described in the paper "[The Network Management Unit (NMU): Securing Network Access for Direct-Connected FPGAs](https://dl.acm.org/citation.cfm?id=3293903)," presented at FPGA 2019 in Monterey California. The individual components are to be used to generate separate IPs, and then connected using the Vivado IP Integrator. Note, retiming is required for many of these components. 
