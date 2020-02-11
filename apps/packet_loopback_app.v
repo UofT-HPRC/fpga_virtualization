@@ -231,8 +231,7 @@ module packet_loopback_app
             else
                 ctrl_rdata <= 0;
 
-        end else
-            ctrl_rdata <= 0;
+        end
     end 
 
 
