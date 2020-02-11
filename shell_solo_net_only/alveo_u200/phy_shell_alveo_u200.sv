@@ -99,7 +99,7 @@ module phy_shell
     //   PHY layer defined in BD                              //
     //--------------------------------------------------------//
 
-    top_wrapper phy_bd_inst
+    phy_bd_wrapper phy_bd_inst
     (
         .M_AXI_LITE_araddr  (top_ctrl_araddr),
         .M_AXI_LITE_arprot  ( ),

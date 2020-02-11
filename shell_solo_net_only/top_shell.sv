@@ -43,14 +43,14 @@ module top_shell
 #(
     //Network AXI Stream Params
     parameter NET_AXIS_BUS_WIDTH = 64,
-    parameter NET_AXIS_ID_WIDTH = 3,
+    parameter NET_AXIS_ID_WIDTH = 1,
     parameter NET_AXIS_DEST_WIDTH = 1,
 
     //Network Packet Params
     parameter NET_MAX_PACKET_LENGTH = 1522,
 
     //Network Isolation Options
-    parameter NET_INCLUDE_BW_SHAPER = 1,
+    parameter NET_INCLUDE_BW_SHAPER = 0,
     parameter NET_DISALLOW_INGR_BACKPRESSURE = 1,
     parameter NET_DISALLOW_INVALID_MID_PACKET_EGR = 1,
     parameter NET_INCLUDE_TIMEOUT_ERROR_INGR = 0,

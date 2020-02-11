@@ -1,0 +1,9 @@
+*.*
+!.gitignore
+!*wrapper*
+!*.hwh
+!*.tcl
+!*.xci
+!*.bd
+!*.bxml
+!*.hwdef
