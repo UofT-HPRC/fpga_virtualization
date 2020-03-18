@@ -40,6 +40,7 @@ AXI-Lite Control Interface Register Space
           - bit 3 - timeout_error_irq input register
      [8] Egress Channel Init Token Register
      [12] Egress Channel Update Token Register
+     [16] Statistic - number of RX packets dropped while decoupled
 
 Ports:
    axis_tx_s_* - the input axi stream for the tx direction
@@ -398,6 +399,7 @@ module net_iso_top
     wire                            axis_rx_decoupled_tlast;
     wire                            axis_rx_decoupled_tvalid;
     wire                            axis_rx_decoupled_tready;
+    wire                            axis_rx_packet_dropped;
 
     //Other decoupler signals
     wire decouple_force_rx;
@@ -433,6 +435,9 @@ module net_iso_top
         .decouple_force         (decouple_force_rx),
         .decouple_done          (decouple_done_rx),
         .decoupled              (decouple_status_vector[1]),
+
+        //Dropped Packet Signal
+        .packet_dropped         (axis_rx_packet_dropped),
 
         //Clocking
         .aclk                   (aclk),
@@ -582,6 +587,9 @@ module net_iso_top
         .decouple_status_vector (decouple_status_vector),
         .oversize_error_irq     (oversize_error_irq),
         .timeout_error_irq      (timeout_error_irq),
+
+        //Signals for statistics counters
+        .rx_packet_dropped      (axis_rx_packet_dropped),
 
         //Clocking
         .aclk               (aclk),

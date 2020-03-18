@@ -31,6 +31,7 @@ Ports:
    decouple_force - an active decouple signal, forces immediate dropping of packets, even mid-transaction (ingress direction)
    decouple_done - indicates when the decoupling has been completed
    decoupled - indicates that the core is decoupled (differs from above in that it doesn't wait for a requested decouple action)
+   packet_dropped - indicates that a packet has been dropped in the decouipled state (asserted at end of packet, tlast)
    aclk - axi clock signal, all interfaces synchronous to this clock
    aresetn - active-low reset, synchronous
 */
@@ -68,6 +69,9 @@ module axi_stream_slave_decoupler
 
     output wire                             decouple_done,
     output wire                             decoupled,
+
+    //Indicate packet dropped (for statistics counting)
+    output wire                             packet_dropped,
 
     //Clocking
     input wire  aclk,
@@ -134,6 +138,7 @@ module axi_stream_slave_decoupler
     //decouple done signal
     assign decouple_done = decouple && !outst_packet;
     assign decoupled = ingr_decoupled;
+    assign packet_dropped = ingr_decoupled && axis_s_tvalid && axis_s_tlast;
 
 
 

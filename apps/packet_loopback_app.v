@@ -92,6 +92,7 @@ module packet_loopback_app
     reg [31:0]  packet_count_rx;
     reg [31:0]  packet_count_tx;
     reg         fifo_was_full;
+    reg         read_en;
     wire        packet_dropped;
 
     //AXI-LITE registered signals
@@ -173,17 +174,20 @@ module packet_loopback_app
     reg count_rx_write;
     reg count_tx_write;
     reg fifo_full_write;
+    reg read_en_write;
 
     //Determine which register to write to
     always @(*) begin
         count_rx_write = 0;
         count_tx_write = 0;
         fifo_full_write = 0;
+        read_en_write = 0;
 
         if(slv_reg_wren)
             if(wr_addr == 0)        count_rx_write = 1;
             else if(wr_addr == 1)   count_tx_write = 1;
             else if(wr_addr == 2)   fifo_full_write = 1;
+            else if(wr_addr == 3)   read_en_write = 1;
     end 
 
     //Update the RX counter
@@ -216,6 +220,14 @@ module packet_loopback_app
             fifo_was_full <= 1;
     end 
 
+    //Update the read enable
+    always @(posedge aclk) begin
+        if(~aresetn) 
+            read_en <= 1;
+        else if(read_en_write)
+            read_en <= ctrl_wdata[0];
+    end 
+
     //Do the read
     always @(posedge aclk) begin
         if(~aresetn) 
@@ -228,8 +240,12 @@ module packet_loopback_app
                 ctrl_rdata <= packet_count_tx;
             else if(rd_addr == 2)
                 ctrl_rdata <= fifo_was_full;
+            else if(rd_addr == 3)
+                ctrl_rdata <= read_en;
+            else if(rd_addr == 4)
+                ctrl_rdata <= 32'h42;
             else
-                ctrl_rdata <= 0;
+                ctrl_rdata <= 32'hcafeca5a; //
 
         end
     end 
@@ -239,6 +255,8 @@ module packet_loopback_app
     //--------------------------------------------------------//
     //   Loopback Connection                                  //
     //--------------------------------------------------------//
+
+    wire fifo_out_tvalid;
 
     //The packet mode FIFO to connect RX to TX
     axi_stream_fifo
@@ -265,7 +283,7 @@ module packet_loopback_app
         .WAIT_UNTIL_TUSER_SIG           (0), //i.e. some 'buffering done' signal (we don't need this feature)
         .WAIT_TUSER_SIG_INDEX           (0),
 
-        //Seperate Side-Channel festures (only one should be enabled)
+        //Seperate Side-Channel features (only one should be enabled)
         .WRITE_SIDE_ONCE_ON_STABLE      (0),
         .WRITE_SIDE_ONCE_ON_BUFFER_DONE (0)
     )
@@ -288,8 +306,8 @@ module packet_loopback_app
         .axis_out_tdest     (axis_out_tdest),
         .axis_out_tuser     ( ),
         .axis_out_tlast     (axis_out_tlast),
-        .axis_out_tvalid    (axis_out_tvalid),
-        .axis_out_tready    (axis_out_tready),
+        .axis_out_tvalid    (fifo_out_tvalid),
+        .axis_out_tready    (axis_out_tready & read_en),
 
         //Dropped packet indicator
         .packet_dropped     (packet_dropped),
@@ -298,6 +316,8 @@ module packet_loopback_app
         .aclk               (aclk),
         .aresetn            (aresetn)
     );
+
+    assign axis_out_tvalid = fifo_out_tvalid & read_en;
 
 
 

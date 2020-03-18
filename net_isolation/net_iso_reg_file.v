@@ -28,6 +28,7 @@ AXI-Lite Control Interface Register Space
           - bit 3 - timeout_error_irq input register
      [8] Egress Channel Init Token Register
      [12] Egress Channel Update Token Register
+     [16] Statistic - number of RX packets dropped while decoupled
 
 Ports:
    [aw|w|b|ar|r]* - the AXI-Lite control interface
@@ -38,6 +39,7 @@ Ports:
    oversize_error_clear - output register, to clear the oversize decouple condition
    timeout_error_irq - input register, whether or not a timeout condition has occured on ingress
    timeout_error_clear - output register, to clear the timeout condition (asserted for a single cycle only)
+   rx_packet_dropped - indicates that an RX packet has been dropped in the decoupled state
    *_token - output registers, the token init and update values for the BW Shaper
    aclk - axi clock signal, all interfaces synchronous to this clock
    aresetn - active-low reset, synchronous
@@ -85,6 +87,9 @@ module net_iso_reg_file
     input wire          timeout_error_irq,
     output reg          timeout_error_clear,
 
+    //Signals for statistics counters
+    input wire          rx_packet_dropped,
+
     //Signals to bw_shaper
     output reg [TOKEN_COUNT_INT_WIDTH-1:0]  init_token,
     output reg [TOKEN_COUNT_FRAC_WIDTH:0]   upd_token,
@@ -103,6 +108,7 @@ module net_iso_reg_file
     localparam VERIFIER_REG_ADDR = 1; //{timeout_error_irq, oversize_error_irq, timeout_error_clear, oversize_error_clear}
     localparam INIT_REG_ADDR = 2;
     localparam UPD_REG_ADDR = 3;
+    localparam RX_PACK_DROP = 4,
 
     
     
@@ -198,12 +204,16 @@ module net_iso_reg_file
 
     wire [ADDR_WIDTH_ALIGNED-1:0]   wr_addr = awaddr_reg[ADDR_LSB+:ADDR_WIDTH_ALIGNED];
 
+    //Indicate resets for stat counters
+    reg stat_rx_packets_dropped_reset;
+
     //Write to the registers
     //NOTE - ignores wstrb 
     always @(posedge aclk) begin
 
         //clear back to zero (only asserted for a single cycle)
         timeout_error_clear <= 0;
+        stat_rx_packets_dropped_reset <= 0;
 
         if(~aresetn) begin
 
@@ -212,6 +222,7 @@ module net_iso_reg_file
             timeout_error_clear <= 0;
             init_token <= 0;
             init_token <= 0;
+            stat_rx_packets_dropped_reset <= 0;
         
         end else if(slv_reg_wren) begin
 
@@ -237,6 +248,12 @@ module net_iso_reg_file
                 upd_token <= wdata[0+:TOKEN_COUNT_FRAC_WIDTH+1];
 
             end
+            else if(wr_addr == RX_PACK_DROP) begin
+
+                //Any write triggers a reset
+                stat_rx_packets_dropped_reset <= 1;
+
+            end
            
         end
 
@@ -244,6 +261,22 @@ module net_iso_reg_file
 
 
     
+    //--------------------------------------------------------//
+    //  Statistics Counters                                   //
+    //--------------------------------------------------------//
+
+    //Registers for stats
+    reg [31:0] stat_rx_packets_dropped;
+
+    always @(posedge aclk) begin
+        if(~aresetn || stat_rx_packets_dropped_reset) 
+            stat_rx_packets_dropped <= 0;
+        else if(rx_packet_dropped) 
+            stat_rx_packets_dropped <= stat_rx_packets_dropped + 1;
+    end
+
+
+
     //--------------------------------------------------------//
     //  Read Functionality                                    //
     //--------------------------------------------------------//
@@ -277,6 +310,11 @@ module net_iso_reg_file
 
             reg_data_out = upd_token;
 
+        end
+        else if(rd_addr == RX_PACK_DROP) begin
+
+            reg_data_out = stat_rx_packets_dropped;
+            
         end
 
     end 
