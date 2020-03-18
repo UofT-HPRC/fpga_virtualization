@@ -214,7 +214,7 @@ module packet_loopback_app
     always @(posedge aclk) begin
         if(~aresetn) 
             fifo_was_full <= 0;
-        else if(count_rx_write)
+        else if(fifo_full_write)
             fifo_was_full <= ctrl_wdata[0];
         else if(packet_dropped)
             fifo_was_full <= 1;

@@ -35,7 +35,11 @@ Parameters:
    CTRL_W_BEFORE_AW_CAPABLE - binary, whether or not the module can expect W-channel beats before the corresponding AW request has been accepted, control interface
 
 AXI-Lite Control Interface Register Space
-   TODO - need to insert vendor core for this at the moment
+   Based on currently implemented AXI lite crossbar:
+       0x0000000000000000 - Base address of the application region's axi lite space
+       0x0000000000100000 - Base address of the network isolation/decoupler core
+       0x0000000000200000 - Base address of the control isolation/decoupler core
+       0x0000000000300000 - Base address of the clocking and reset controller
 
 Ports:
    axis_tx_s_* - the input axi stream for the tx direction

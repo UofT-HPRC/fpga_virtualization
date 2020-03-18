@@ -13,8 +13,6 @@ Description:
 
 Parameters:
    NET_AXIS_BUS_WIDTH - the data width of the axi-streams (must be multiple of 8)
-   NET_AXIS_ID_WIDTH - the width of the AXI ID signals in the TX direction and TDEST signals in the RX direction, seen by the application region
-   NET_AXIS_DEST_WIDTH - the width of all network stream AXI DEST sigals
    NET_MAX_PACKET_LENGTH - the maximum network packet length to support (for forced tlast)
 
 Ports:
@@ -41,8 +39,6 @@ module phy_shell
 #(
     //Network AXI Stream Params (as seen by application regions)
     parameter NET_AXIS_BUS_WIDTH = 64,
-    parameter NET_AXIS_ID_WIDTH = 3,
-    parameter NET_AXIS_DEST_WIDTH = 1,
 
     //Network Packet Params
     parameter NET_MAX_PACKET_LENGTH = 1522
