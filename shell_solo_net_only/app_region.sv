@@ -171,6 +171,15 @@ module app_region
       .m_axi_rready(net_lite_access_rready)    // output wire m_axi_rready
     );
 
+    //TX signals (before register slice)
+    wire [NET_AXIS_BUS_WIDTH-1:0]         reg_tx_tdata;
+    wire [NET_AXIS_ID_WIDTH-1:0]          reg_tx_tid;
+    wire [NET_AXIS_DEST_WIDTH-1:0]        reg_tx_tdest;
+    wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     reg_tx_tkeep;
+    wire                                  reg_tx_tlast;
+    wire                                  reg_tx_tvalid;
+    wire                                  reg_tx_tready;
+
     //network application access app
     packet_loopback_app
     #(
@@ -179,15 +188,16 @@ module app_region
         .AXIS_DEST_WIDTH        (NET_AXIS_DEST_WIDTH),
         .MAX_FIFO_DEPTH         (256)
     )
+    loopback_app_inst
     (
         //Egress Output AXI stream
-        .axis_out_tdata     (axis_tx_m_tdata),
-        .axis_out_tid       (axis_tx_m_tid),
-        .axis_out_tdest     (axis_tx_m_tdest),
-        .axis_out_tkeep     (axis_tx_m_tkeep),
-        .axis_out_tlast     (axis_tx_m_tlast),
-        .axis_out_tvalid    (axis_tx_m_tvalid),
-        .axis_out_tready    (axis_tx_m_tready),
+        .axis_out_tdata     (reg_tx_tdata),
+        .axis_out_tid       (reg_tx_tid),
+        .axis_out_tdest     (reg_tx_tdest),
+        .axis_out_tkeep     (reg_tx_tkeep),
+        .axis_out_tlast     (reg_tx_tlast),
+        .axis_out_tvalid    (reg_tx_tvalid),
+        .axis_out_tready    (reg_tx_tready),
 
         //Ingress Input AXI stream
         .axis_in_tdata      (axis_rx_s_tdata),
@@ -219,6 +229,34 @@ module app_region
         .aclk               (axis_aclk),
         .aresetn            (axis_aresetn)
     );
+
+    //Register slices in TX direction
+    reg_slice_full
+    #(
+        .DATA_WIDTH(NET_AXIS_BUS_WIDTH + NET_AXIS_ID_WIDTH + NET_AXIS_DEST_WIDTH + (NET_AXIS_BUS_WIDTH/8) + 1)
+    )
+    tx_reg_slice
+    (
+        .in_data    ( { reg_tx_tdata,
+                        reg_tx_tid,
+                        reg_tx_tdest,
+                        reg_tx_tkeep,
+                        reg_tx_tlast }),
+        .in_valid   (reg_tx_tvalid),
+        .in_ready   (reg_tx_tready),
+
+        .out_data   ( { axis_tx_m_tdata,
+                        axis_tx_m_tid,
+                        axis_tx_m_tdest,
+                        axis_tx_m_tkeep,
+                        axis_tx_m_tlast }),
+        .out_valid  (axis_tx_m_tvalid),
+        .out_ready  (axis_tx_m_tready),
+                
+        .clk        (axis_aclk),
+        .resetn     (axis_aresetn)
+    );
+
 
 
 endmodule

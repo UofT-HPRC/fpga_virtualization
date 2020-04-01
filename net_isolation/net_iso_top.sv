@@ -510,7 +510,7 @@ module net_iso_top
     #(
         .DATA_WIDTH(AXIS_BUS_WIDTH + AXIS_ID_WIDTH + (AXIS_BUS_WIDTH/8) + 1)
     )
-    rx_reg_slice
+    tx_reg_slice
     (
         .in_data    ( { axis_rx_s_tdata,
                         axis_rx_s_tdest,
