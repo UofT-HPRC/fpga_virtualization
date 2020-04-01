@@ -108,7 +108,7 @@ module axi_stream_master_verifier
 
     //Count beats sent in current packet
     localparam MAX_BEATS = 
-        (MAX_PACKET_LENGTH/AXIS_BUS_WIDTH) + (MAX_PACKET_LENGTH % AXIS_BUS_WIDTH == 0 ? 0 : 1);
+        (MAX_PACKET_LENGTH / (AXIS_BUS_WIDTH/8) ) + (MAX_PACKET_LENGTH % (AXIS_BUS_WIDTH/8) == 0 ? 0 : 1);
     reg [$clog2(MAX_BEATS+1)-1:0] beat_count;
 
     always@(posedge aclk) begin
