@@ -218,7 +218,7 @@ proc create_hier_cell_qsfp0 { parentCell nameHier } {
   # Create instance: ethernet_link_up, and set properties
   set ethernet_link_up [ create_bd_cell -type ip -vlnv xilinx.com:ip:vio:3.0 ethernet_link_up ]
   set_property -dict [ list \
-   CONFIG.C_NUM_PROBE_OUT {1} \
+   CONFIG.C_NUM_PROBE_OUT {0} \
    CONFIG.C_PROBE_OUT0_INIT_VAL {0x1} \
  ] $ethernet_link_up
 
@@ -266,12 +266,6 @@ proc create_hier_cell_qsfp0 { parentCell nameHier } {
    CONFIG.C_SIZE {1} \
  ] $util_reduced_logic_0
 
-  # Create instance: util_reduced_logic_1, and set properties
-  set util_reduced_logic_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_reduced_logic:2.0 util_reduced_logic_1 ]
-  set_property -dict [ list \
-   CONFIG.C_SIZE {2} \
- ] $util_reduced_logic_1
-
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
@@ -280,8 +274,13 @@ proc create_hier_cell_qsfp0 { parentCell nameHier } {
    CONFIG.LOGO_FILE {data/sym_notgate.png} \
  ] $util_vector_logic_0
 
-  # Create instance: xlconcat_0, and set properties
-  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
+  # Create instance: util_vector_logic_1, and set properties
+  set util_vector_logic_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_1 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {not} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_notgate.png} \
+ ] $util_vector_logic_1
 
   # Create instance: xxv_ethernet_1, and set properties
   set xxv_ethernet_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xxv_ethernet:3.0 xxv_ethernet_1 ]
@@ -312,20 +311,18 @@ proc create_hier_cell_qsfp0 { parentCell nameHier } {
   connect_bd_net -net GT_clk_sel_dout [get_bd_pins GT_clk_sel/dout] [get_bd_pins xxv_ethernet_1/rxoutclksel_in_0] [get_bd_pins xxv_ethernet_1/txoutclksel_in_0]
   connect_bd_net -net GT_loopback_dout [get_bd_pins GT_loopback/dout] [get_bd_pins xxv_ethernet_1/gt_loopback_in_0]
   connect_bd_net -net aresetn_in_1 [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins util_reduced_logic_0/Op1]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins ethernet_link_up/clk] [get_bd_pins xxv_ethernet_1/dclk]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins xxv_ethernet_1/dclk]
   connect_bd_net -net ethernet_link_up_vio [get_bd_pins ethernet_link_up/probe_in0] [get_bd_pins xxv_ethernet_1/stat_rx_status_0]
-  connect_bd_net -net ethernet_resetn_vio [get_bd_pins ethernet_link_up/probe_out0] [get_bd_pins xlconcat_0/In1]
-  connect_bd_net -net ext_reset_in_1 [get_bd_pins aresetn_in] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins xlconcat_0/In0]
+  connect_bd_net -net ext_reset_in_1 [get_bd_pins aresetn_in] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net ipg_value_dout [get_bd_pins ipg_value/dout] [get_bd_pins xxv_ethernet_1/ctl_tx_ipg_value_0]
   connect_bd_net -net maxTU_dout [get_bd_pins maxTU/dout] [get_bd_pins xxv_ethernet_1/ctl_rx_max_packet_len_0]
   connect_bd_net -net minTU_dout [get_bd_pins minTU/dout] [get_bd_pins xxv_ethernet_1/ctl_rx_min_packet_len_0]
   connect_bd_net -net one_dout1 [get_bd_pins one/dout] [get_bd_pins xxv_ethernet_1/ctl_rx_check_preamble_0] [get_bd_pins xxv_ethernet_1/ctl_rx_check_sfd_0] [get_bd_pins xxv_ethernet_1/ctl_rx_delete_fcs_0] [get_bd_pins xxv_ethernet_1/ctl_rx_enable_0] [get_bd_pins xxv_ethernet_1/ctl_rx_process_lfi_0] [get_bd_pins xxv_ethernet_1/ctl_tx_enable_0] [get_bd_pins xxv_ethernet_1/ctl_tx_fcs_ins_enable_0]
   connect_bd_net -net preamble_dout [get_bd_pins preamble/dout] [get_bd_pins xxv_ethernet_1/tx_preamblein_0]
-  connect_bd_net -net util_reduced_logic_0_Res [get_bd_pins aresetn_out] [get_bd_pins util_reduced_logic_0/Res]
-  connect_bd_net -net util_reduced_logic_1_Res [get_bd_pins util_reduced_logic_1/Res] [get_bd_pins util_vector_logic_0/Op1]
-  connect_bd_net -net util_vector_logic_0_Res [get_bd_pins util_vector_logic_0/Res] [get_bd_pins xxv_ethernet_1/rx_reset_0] [get_bd_pins xxv_ethernet_1/sys_reset] [get_bd_pins xxv_ethernet_1/tx_reset_0]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins util_reduced_logic_1/Op1] [get_bd_pins xlconcat_0/dout]
-  connect_bd_net -net xxv_ethernet_1_tx_clk_out_0 [get_bd_pins aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins xxv_ethernet_1/rx_core_clk_0] [get_bd_pins xxv_ethernet_1/tx_clk_out_0]
+  connect_bd_net -net util_reduced_logic_0_Res [get_bd_pins aresetn_out] [get_bd_pins util_reduced_logic_0/Res] [get_bd_pins util_vector_logic_1/Op1]
+  connect_bd_net -net util_vector_logic_0_Res [get_bd_pins util_vector_logic_0/Res] [get_bd_pins xxv_ethernet_1/rx_reset_0] [get_bd_pins xxv_ethernet_1/sys_reset]
+  connect_bd_net -net util_vector_logic_1_Res [get_bd_pins util_vector_logic_1/Res] [get_bd_pins xxv_ethernet_1/tx_reset_0]
+  connect_bd_net -net xxv_ethernet_1_tx_clk_out_0 [get_bd_pins aclk] [get_bd_pins ethernet_link_up/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins xxv_ethernet_1/rx_core_clk_0] [get_bd_pins xxv_ethernet_1/tx_clk_out_0]
   connect_bd_net -net zero_dout1 [get_bd_pins xxv_ethernet_1/ctl_rx_custom_preamble_enable_0] [get_bd_pins xxv_ethernet_1/ctl_rx_data_pattern_select_0] [get_bd_pins xxv_ethernet_1/ctl_rx_force_resync_0] [get_bd_pins xxv_ethernet_1/ctl_rx_ignore_fcs_0] [get_bd_pins xxv_ethernet_1/ctl_rx_test_pattern_0] [get_bd_pins xxv_ethernet_1/ctl_rx_test_pattern_enable_0] [get_bd_pins xxv_ethernet_1/ctl_tx_custom_preamble_enable_0] [get_bd_pins xxv_ethernet_1/ctl_tx_data_pattern_select_0] [get_bd_pins xxv_ethernet_1/ctl_tx_ignore_fcs_0] [get_bd_pins xxv_ethernet_1/ctl_tx_send_idle_0] [get_bd_pins xxv_ethernet_1/ctl_tx_send_lfi_0] [get_bd_pins xxv_ethernet_1/ctl_tx_send_rfi_0] [get_bd_pins xxv_ethernet_1/ctl_tx_test_pattern_0] [get_bd_pins xxv_ethernet_1/ctl_tx_test_pattern_enable_0] [get_bd_pins xxv_ethernet_1/ctl_tx_test_pattern_select_0] [get_bd_pins xxv_ethernet_1/gtwiz_reset_rx_datapath_0] [get_bd_pins xxv_ethernet_1/gtwiz_reset_tx_datapath_0] [get_bd_pins zero/dout]
 
   # Restore current instance

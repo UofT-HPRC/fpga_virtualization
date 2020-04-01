@@ -33,11 +33,10 @@
         "preamble": "",
         "proc_sys_reset_0": "",
         "util_reduced_logic_0": "",
-        "util_reduced_logic_1": "",
         "util_vector_logic_0": "",
-        "xlconcat_0": "",
         "xxv_ethernet_1": "",
-        "zero": ""
+        "zero": "",
+        "util_vector_logic_1": ""
       },
       "axi_register_slice_0": ""
     },
@@ -407,16 +406,16 @@
           }
         },
         "interface_nets": {
-          "pcie_M_AXI": {
-            "interface_ports": [
-              "S_AXI",
-              "axi_bram_ctrl_0/S_AXI"
-            ]
-          },
           "axi_bram_ctrl_0_BRAM_PORTA": {
             "interface_ports": [
               "axi_bram_ctrl_0/BRAM_PORTA",
               "axi_bram_ctrl_0_bram/BRAM_PORTA"
+            ]
+          },
+          "pcie_M_AXI": {
+            "interface_ports": [
+              "S_AXI",
+              "axi_bram_ctrl_0/S_AXI"
             ]
           }
         },
@@ -627,6 +626,12 @@
               "xdma_0/pcie_mgt"
             ]
           },
+          "xdma_0_M_AXI": {
+            "interface_ports": [
+              "M_AXI",
+              "xdma_0/M_AXI"
+            ]
+          },
           "xdma_0_M_AXI_LITE": {
             "interface_ports": [
               "M_AXI_LITE",
@@ -637,12 +642,6 @@
             "interface_ports": [
               "pcie_refclk",
               "util_ds_buf_0/CLK_IN_D"
-            ]
-          },
-          "xdma_0_M_AXI": {
-            "interface_ports": [
-              "M_AXI",
-              "xdma_0/M_AXI"
             ]
           }
         },
@@ -845,7 +844,7 @@
             "xci_name": "phy_bd_ethernet_link_up_0",
             "parameters": {
               "C_NUM_PROBE_OUT": {
-                "value": "1"
+                "value": "0"
               },
               "C_PROBE_OUT0_INIT_VAL": {
                 "value": "0x1"
@@ -925,15 +924,6 @@
               }
             }
           },
-          "util_reduced_logic_1": {
-            "vlnv": "xilinx.com:ip:util_reduced_logic:2.0",
-            "xci_name": "phy_bd_util_reduced_logic_1_0",
-            "parameters": {
-              "C_SIZE": {
-                "value": "2"
-              }
-            }
-          },
           "util_vector_logic_0": {
             "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
             "xci_name": "phy_bd_util_vector_logic_0_0",
@@ -945,10 +935,6 @@
                 "value": "1"
               }
             }
-          },
-          "xlconcat_0": {
-            "vlnv": "xilinx.com:ip:xlconcat:2.1",
-            "xci_name": "phy_bd_xlconcat_0_1"
           },
           "xxv_ethernet_1": {
             "vlnv": "xilinx.com:ip:xxv_ethernet:3.0",
@@ -982,25 +968,37 @@
                 "value": "0"
               }
             }
+          },
+          "util_vector_logic_1": {
+            "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
+            "xci_name": "phy_bd_util_vector_logic_0_1",
+            "parameters": {
+              "C_OPERATION": {
+                "value": "not"
+              },
+              "C_SIZE": {
+                "value": "1"
+              }
+            }
           }
         },
         "interface_nets": {
-          "refclk_300M_1": {
-            "interface_ports": [
-              "refclk_300mhz",
-              "clk_wiz_0/CLK_IN1_D"
-            ]
-          },
           "axis_tx_1": {
             "interface_ports": [
               "axis_tx",
               "xxv_ethernet_1/axis_tx_0"
             ]
           },
-          "Conn3": {
+          "xxv_ethernet_1_axis_rx_0": {
             "interface_ports": [
-              "qsfp0_1x_0",
-              "xxv_ethernet_1/gt_serial_port"
+              "axis_rx",
+              "xxv_ethernet_1/axis_rx_0"
+            ]
+          },
+          "refclk_300M_1": {
+            "interface_ports": [
+              "refclk_300mhz",
+              "clk_wiz_0/CLK_IN1_D"
             ]
           },
           "Conn4": {
@@ -1009,10 +1007,10 @@
               "xxv_ethernet_1/gt_ref_clk"
             ]
           },
-          "xxv_ethernet_1_axis_rx_0": {
+          "Conn3": {
             "interface_ports": [
-              "axis_rx",
-              "xxv_ethernet_1/axis_rx_0"
+              "qsfp0_1x_0",
+              "xxv_ethernet_1/gt_serial_port"
             ]
           }
         },
@@ -1039,7 +1037,6 @@
           "clk_wiz_0_clk_out1": {
             "ports": [
               "clk_wiz_0/clk_out1",
-              "ethernet_link_up/clk",
               "xxv_ethernet_1/dclk"
             ]
           },
@@ -1049,17 +1046,11 @@
               "ethernet_link_up/probe_in0"
             ]
           },
-          "ethernet_resetn_vio": {
-            "ports": [
-              "ethernet_link_up/probe_out0",
-              "xlconcat_0/In1"
-            ]
-          },
           "ext_reset_in_1": {
             "ports": [
               "aresetn_in",
               "proc_sys_reset_0/ext_reset_in",
-              "xlconcat_0/In0"
+              "util_vector_logic_0/Op1"
             ]
           },
           "ipg_value_dout": {
@@ -1101,27 +1092,15 @@
           "util_reduced_logic_0_Res": {
             "ports": [
               "util_reduced_logic_0/Res",
-              "aresetn_out"
-            ]
-          },
-          "util_reduced_logic_1_Res": {
-            "ports": [
-              "util_reduced_logic_1/Res",
-              "util_vector_logic_0/Op1"
+              "aresetn_out",
+              "util_vector_logic_1/Op1"
             ]
           },
           "util_vector_logic_0_Res": {
             "ports": [
               "util_vector_logic_0/Res",
               "xxv_ethernet_1/rx_reset_0",
-              "xxv_ethernet_1/sys_reset",
-              "xxv_ethernet_1/tx_reset_0"
-            ]
-          },
-          "xlconcat_0_dout": {
-            "ports": [
-              "xlconcat_0/dout",
-              "util_reduced_logic_1/Op1"
+              "xxv_ethernet_1/sys_reset"
             ]
           },
           "xxv_ethernet_1_tx_clk_out_0": {
@@ -1129,7 +1108,8 @@
               "xxv_ethernet_1/tx_clk_out_0",
               "aclk",
               "proc_sys_reset_0/slowest_sync_clk",
-              "xxv_ethernet_1/rx_core_clk_0"
+              "xxv_ethernet_1/rx_core_clk_0",
+              "ethernet_link_up/clk"
             ]
           },
           "zero_dout1": {
@@ -1152,6 +1132,12 @@
               "xxv_ethernet_1/ctl_tx_test_pattern_select_0",
               "xxv_ethernet_1/gtwiz_reset_rx_datapath_0",
               "xxv_ethernet_1/gtwiz_reset_tx_datapath_0"
+            ]
+          },
+          "util_vector_logic_1_Res": {
+            "ports": [
+              "util_vector_logic_1/Res",
+              "xxv_ethernet_1/tx_reset_0"
             ]
           }
         }
@@ -1182,16 +1168,10 @@
       }
     },
     "interface_nets": {
-      "axis_tx_1": {
+      "refclk_300M_1": {
         "interface_ports": [
-          "axis_tx",
-          "qsfp0/axis_tx"
-        ]
-      },
-      "axi_register_slice_0_M_AXI": {
-        "interface_ports": [
-          "M_AXI_LITE",
-          "axi_register_slice_0/M_AXI"
+          "refclk_300mhz",
+          "qsfp0/refclk_300mhz"
         ]
       },
       "qsfp0_qsfp0_1x_0": {
@@ -1200,10 +1180,10 @@
           "qsfp0/qsfp0_1x_0"
         ]
       },
-      "refclk_300M_1": {
+      "axi_register_slice_0_M_AXI": {
         "interface_ports": [
-          "refclk_300mhz",
-          "qsfp0/refclk_300mhz"
+          "M_AXI_LITE",
+          "axi_register_slice_0/M_AXI"
         ]
       },
       "pcie_M_AXI": {
@@ -1216,6 +1196,18 @@
         "interface_ports": [
           "axis_rx",
           "qsfp0/axis_rx"
+        ]
+      },
+      "axis_tx_1": {
+        "interface_ports": [
+          "axis_tx",
+          "qsfp0/axis_tx"
+        ]
+      },
+      "pcie_refclk_1": {
+        "interface_ports": [
+          "pcie_refclk",
+          "pcie/pcie_refclk"
         ]
       },
       "xdma_0_pcie_mgt": {
@@ -1234,12 +1226,6 @@
         "interface_ports": [
           "pcie/M_AXI_LITE",
           "axi_register_slice_0/S_AXI"
-        ]
-      },
-      "pcie_refclk_1": {
-        "interface_ports": [
-          "pcie_refclk",
-          "pcie/pcie_refclk"
         ]
       }
     },

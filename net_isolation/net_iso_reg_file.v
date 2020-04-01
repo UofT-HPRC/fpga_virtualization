@@ -108,7 +108,7 @@ module net_iso_reg_file
     localparam VERIFIER_REG_ADDR = 1; //{timeout_error_irq, oversize_error_irq, timeout_error_clear, oversize_error_clear}
     localparam INIT_REG_ADDR = 2;
     localparam UPD_REG_ADDR = 3;
-    localparam RX_PACK_DROP = 4,
+    localparam RX_PACK_DROP = 4;
 
     
     

@@ -253,6 +253,7 @@ module interface_shell
         .TOKEN_COUNT_INT_WIDTH              (NET_TOKEN_COUNT_INT_WIDTH),
         .TOKEN_COUNT_FRAC_WIDTH             (NET_TOKEN_COUNT_FRAC_WIDTH)
     )
+    net_iso_inst
     (
         //Egress Input AXI stream (the master interface to isolate connects to this)
         .axis_tx_s_tdata        (axis_tx_s_tdata),
@@ -548,11 +549,11 @@ module interface_shell
     wire            clock_decouple_ctrl_rready;
 
     //Outputs of clock decoupling controller
-    wire decouple;
+    wire clock_decouple;
     wire assert_reset;
 
     //Clock decoupler controller
-    clock_reset_decouple_controller
+    clock_reset_decouple_controller clk_rst_decouple_ctrl_inst
     (
         //The AXI-Lite interface
         .awaddr     (clock_decouple_ctrl_awaddr),
@@ -573,7 +574,7 @@ module interface_shell
         .rready     (clock_decouple_ctrl_rready),
         
         //Outputs
-        .decouple       (decouple),
+        .decouple       (clock_decouple),
         .assert_reset   (assert_reset),
 
         //Clocking
@@ -586,16 +587,42 @@ module interface_shell
     //   - Input clocks are axis_aclk, and ctrl_aclk
     //   - Output clocks are axi_mem_pr_aclk, axis_pr_aclk, and ctrl_pr_aclk
     //   - the decouple signal should be used to decouple, or it's inverse as the clock enable
-    two_clock_decouple clock_decouple_inst 
+    one_clock_decouple clock_decouple_ctrl_inst 
+    (
+      .s_clock_0_CLK(ctrl_aclk),    // input wire s_clock_0_CLK
+      .rp_clock_0_CLK(ctrl_pr_aclk),  // output wire rp_clock_0_CLK
+      
+      .decouple(clock_decouple)              // input wire decouple
+    );
+    
+    wire clock_decouple_net; //Need to clock cross the decouple signal to remove timing violations
+    
+    xpm_cdc_array_single
+    #(
+        .DEST_SYNC_FF(3),   //DECIMAL; range:2-10
+        .INIT_SYNC_FF(0),   //DECIMAL; integer; 0=disable simulation init values, 1=enable simulation init values
+        .SIM_ASSERT_CHK(0), //DECIMAL; integer; 0=disable simulation messages, 1=enable simulation messages
+        .SRC_INPUT_REG(1),  //DECIMAL; 0=do not register input, 1=register input
+        .WIDTH(1)           //DECIMAL; range:1-1024
+    )
+    sync_net_decoup_inst
+    (
+        .src_in     (clock_decouple),
+        .dest_out   (clock_decouple_net),
+
+        .src_clk    (ctrl_aclk),
+        .dest_clk   (axis_aclk)        
+    );
+    
+    one_clock_decouple clock_decouple_net_inst 
     (
       .s_clock_0_CLK(axis_aclk),    // input wire s_clock_0_CLK
       .rp_clock_0_CLK(axis_pr_aclk),  // output wire rp_clock_0_CLK
       
-      .s_clock_1_CLK(ctrl_aclk),    // input wire s_clock_1_CLK
-      .rp_clock_1_CLK(ctrl_pr_aclk),  // output wire rp_clock_1_CLK
-      
-      .decouple(decouple)              // input wire decouple
+      .decouple(clock_decouple_net)              // input wire decouple
     );
+
+
 
     //Clock crossing for the assert reset signals
     wire assert_reset_net;
