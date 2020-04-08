@@ -519,6 +519,75 @@ module interface_shell
         .aresetn                (ctrl_aresetn)
     );
 
+    //Control interface for control isolation cores (register slice input)
+    //Write Address Channel  
+    wire [31:0]     ctrl_iso_reg_ctrl_awaddr;
+    wire            ctrl_iso_reg_ctrl_awvalid;
+    wire            ctrl_iso_reg_ctrl_awready;
+    //Write Data Channel
+    wire  [31:0]    ctrl_iso_reg_ctrl_wdata;
+    wire            ctrl_iso_reg_ctrl_wvalid;
+    wire            ctrl_iso_reg_ctrl_wready;
+    //Write Response Channel
+    wire [1:0]      ctrl_iso_reg_ctrl_bresp;
+    wire            ctrl_iso_reg_ctrl_bvalid;
+    wire            ctrl_iso_reg_ctrl_bready;
+    //Read Address Channel 
+    wire  [31:0]    ctrl_iso_reg_ctrl_araddr;
+    wire            ctrl_iso_reg_ctrl_arvalid;
+    wire            ctrl_iso_reg_ctrl_arready;
+    //Read Data Response Channel
+    wire [31:0]     ctrl_iso_reg_ctrl_rdata;
+    wire [1:0]      ctrl_iso_reg_ctrl_rresp;
+    wire            ctrl_iso_reg_ctrl_rvalid;
+    wire            ctrl_iso_reg_ctrl_rready;
+
+    axil_reg_slice 
+    #(
+        .AXI_ADDR_WIDTH (32)
+    )
+    ctrl_iso_reg_slice
+    (
+        .aclk(ctrl_aclk),
+        .aresetn(ctrl_aresetn),
+
+        .axi_lite_s_awaddr(ctrl_iso_reg_ctrl_awaddr),   
+        .axi_lite_s_awvalid(ctrl_iso_reg_ctrl_awvalid), 
+        .axi_lite_s_awready(ctrl_iso_reg_ctrl_awready), 
+        .axi_lite_s_wdata(ctrl_iso_reg_ctrl_wdata),     
+        .axi_lite_s_wstrb(0),                           
+        .axi_lite_s_wvalid(ctrl_iso_reg_ctrl_wvalid),   
+        .axi_lite_s_wready(ctrl_iso_reg_ctrl_wready),   
+        .axi_lite_s_bresp(ctrl_iso_reg_ctrl_bresp),     
+        .axi_lite_s_bvalid(ctrl_iso_reg_ctrl_bvalid),   
+        .axi_lite_s_bready(ctrl_iso_reg_ctrl_bready),   
+        .axi_lite_s_araddr(ctrl_iso_reg_ctrl_araddr),   
+        .axi_lite_s_arvalid(ctrl_iso_reg_ctrl_arvalid), 
+        .axi_lite_s_arready(ctrl_iso_reg_ctrl_arready), 
+        .axi_lite_s_rdata(ctrl_iso_reg_ctrl_rdata),     
+        .axi_lite_s_rresp(ctrl_iso_reg_ctrl_rresp),     
+        .axi_lite_s_rvalid(ctrl_iso_reg_ctrl_rvalid),   
+        .axi_lite_s_rready(ctrl_iso_reg_ctrl_rready),   
+
+        .axi_lite_m_awaddr(ctrl_iso_ctrl_awaddr),   
+        .axi_lite_m_awvalid(ctrl_iso_ctrl_awvalid), 
+        .axi_lite_m_awready(ctrl_iso_ctrl_awready), 
+        .axi_lite_m_wdata(ctrl_iso_ctrl_wdata),     
+        .axi_lite_m_wstrb( ),                      
+        .axi_lite_m_wvalid(ctrl_iso_ctrl_wvalid),   
+        .axi_lite_m_wready(ctrl_iso_ctrl_wready),   
+        .axi_lite_m_bresp(ctrl_iso_ctrl_bresp),     
+        .axi_lite_m_bvalid(ctrl_iso_ctrl_bvalid),   
+        .axi_lite_m_bready(ctrl_iso_ctrl_bready),   
+        .axi_lite_m_araddr(ctrl_iso_ctrl_araddr),   
+        .axi_lite_m_arvalid(ctrl_iso_ctrl_arvalid), 
+        .axi_lite_m_arready(ctrl_iso_ctrl_arready), 
+        .axi_lite_m_rdata(ctrl_iso_ctrl_rdata),     
+        .axi_lite_m_rresp(ctrl_iso_ctrl_rresp),     
+        .axi_lite_m_rvalid(ctrl_iso_ctrl_rvalid),   
+        .axi_lite_m_rready(ctrl_iso_ctrl_rready)   
+    );
+
 
 
     //--------------------------------------------------------//
@@ -653,6 +722,76 @@ module interface_shell
     assign ctrl_pr_aresetn = ctrl_aresetn & ~assert_reset;
 
 
+    //Control interface for clock decouplers (register slice input)
+    //Write Address Channel  
+    wire [31:0]     clock_decouple_reg_ctrl_awaddr;
+    wire            clock_decouple_reg_ctrl_awvalid;
+    wire            clock_decouple_reg_ctrl_awready;
+    //Write Data Channel
+    wire  [31:0]    clock_decouple_reg_ctrl_wdata;
+    wire            clock_decouple_reg_ctrl_wvalid;
+    wire            clock_decouple_reg_ctrl_wready;
+    //Write Response Channel
+    wire [1:0]      clock_decouple_reg_ctrl_bresp;
+    wire            clock_decouple_reg_ctrl_bvalid;
+    wire            clock_decouple_reg_ctrl_bready;
+    //Read Address Channel 
+    wire  [31:0]    clock_decouple_reg_ctrl_araddr;
+    wire            clock_decouple_reg_ctrl_arvalid;
+    wire            clock_decouple_reg_ctrl_arready;
+    //Read Data Response Channel
+    wire [31:0]     clock_decouple_reg_ctrl_rdata;
+    wire [1:0]      clock_decouple_reg_ctrl_rresp;
+    wire            clock_decouple_reg_ctrl_rvalid;
+    wire            clock_decouple_reg_ctrl_rready;
+
+    axil_reg_slice 
+    #(
+        .AXI_ADDR_WIDTH (32)
+    )
+    clock_decouple_reg_slice
+    (
+        .aclk(ctrl_aclk),
+        .aresetn(ctrl_aresetn),
+
+        .axi_lite_s_awaddr(clock_decouple_reg_ctrl_awaddr),   
+        .axi_lite_s_awvalid(clock_decouple_reg_ctrl_awvalid), 
+        .axi_lite_s_awready(clock_decouple_reg_ctrl_awready), 
+        .axi_lite_s_wdata(clock_decouple_reg_ctrl_wdata),     
+        .axi_lite_s_wstrb(0),                           
+        .axi_lite_s_wvalid(clock_decouple_reg_ctrl_wvalid),   
+        .axi_lite_s_wready(clock_decouple_reg_ctrl_wready),   
+        .axi_lite_s_bresp(clock_decouple_reg_ctrl_bresp),     
+        .axi_lite_s_bvalid(clock_decouple_reg_ctrl_bvalid),   
+        .axi_lite_s_bready(clock_decouple_reg_ctrl_bready),   
+        .axi_lite_s_araddr(clock_decouple_reg_ctrl_araddr),   
+        .axi_lite_s_arvalid(clock_decouple_reg_ctrl_arvalid), 
+        .axi_lite_s_arready(clock_decouple_reg_ctrl_arready), 
+        .axi_lite_s_rdata(clock_decouple_reg_ctrl_rdata),     
+        .axi_lite_s_rresp(clock_decouple_reg_ctrl_rresp),     
+        .axi_lite_s_rvalid(clock_decouple_reg_ctrl_rvalid),   
+        .axi_lite_s_rready(clock_decouple_reg_ctrl_rready),   
+
+        .axi_lite_m_awaddr(clock_decouple_ctrl_awaddr),   
+        .axi_lite_m_awvalid(clock_decouple_ctrl_awvalid), 
+        .axi_lite_m_awready(clock_decouple_ctrl_awready), 
+        .axi_lite_m_wdata(clock_decouple_ctrl_wdata),     
+        .axi_lite_m_wstrb( ),                      
+        .axi_lite_m_wvalid(clock_decouple_ctrl_wvalid),   
+        .axi_lite_m_wready(clock_decouple_ctrl_wready),   
+        .axi_lite_m_bresp(clock_decouple_ctrl_bresp),     
+        .axi_lite_m_bvalid(clock_decouple_ctrl_bvalid),   
+        .axi_lite_m_bready(clock_decouple_ctrl_bready),   
+        .axi_lite_m_araddr(clock_decouple_ctrl_araddr),   
+        .axi_lite_m_arvalid(clock_decouple_ctrl_arvalid), 
+        .axi_lite_m_arready(clock_decouple_ctrl_arready), 
+        .axi_lite_m_rdata(clock_decouple_ctrl_rdata),     
+        .axi_lite_m_rresp(clock_decouple_ctrl_rresp),     
+        .axi_lite_m_rvalid(clock_decouple_ctrl_rvalid),   
+        .axi_lite_m_rready(clock_decouple_ctrl_rready)   
+    );
+
+
 
     //--------------------------------------------------------//
     //   Control Path                                         //
@@ -664,8 +803,8 @@ module interface_shell
     //   - Output slave interfaces are
     //      - axi_lite_s_ctrl_* (connnects to ctrl isolation), with address width 32
     //      - net_iso_sync_ctrl_* (connects to net isolation, through async reg slice), with address width 32
-    //      - ctrl_iso_ctrl_* (connect to ctrl isolation), with address width 32
-    //      - clock_decouple_ctrl_* (connects to clock decouple controller), with address width 32
+    //      - ctrl_iso_reg_ctrl_* (connect to ctrl isolation, through register slice), with address width 32
+    //      - clock_decouple_reg_ctrl_* (connects to clock decouple controller, through register slice), with address width 32
     //   - Note, other than the axi_lite_s, slave interfaces do not have wstrb signal
     //   - all signals synchronous to ctrl_aclk
 
@@ -698,74 +837,74 @@ module interface_shell
       .s_axi_rvalid(ctrl_rvalid),    // output wire [0 : 0] s_axi_rvalid
       .s_axi_rready(ctrl_rready),    // input wire [0 : 0] s_axi_rready
       
-      .m_axi_awaddr({   clock_decouple_ctrl_awaddr,
-                        ctrl_iso_ctrl_awaddr,
+      .m_axi_awaddr({   clock_decouple_reg_ctrl_awaddr,
+                        ctrl_iso_reg_ctrl_awaddr,
                         net_iso_sync_ctrl_awaddr,
                         axi_lite_s_ctrl_awaddr }),    // output wire [104 : 0] m_axi_awaddr
       .m_axi_awprot( ),                       // output wire [14 : 0] m_axi_awprot
-      .m_axi_awvalid({  clock_decouple_ctrl_awvalid,
-                        ctrl_iso_ctrl_awvalid,
+      .m_axi_awvalid({  clock_decouple_reg_ctrl_awvalid,
+                        ctrl_iso_reg_ctrl_awvalid,
                         net_iso_sync_ctrl_awvalid,
                         axi_lite_s_ctrl_awvalid }),  // output wire [4 : 0] m_axi_awvalid
-      .m_axi_awready({  clock_decouple_ctrl_awready,
-                        ctrl_iso_ctrl_awready,
+      .m_axi_awready({  clock_decouple_reg_ctrl_awready,
+                        ctrl_iso_reg_ctrl_awready,
                         net_iso_sync_ctrl_awready,
                         axi_lite_s_ctrl_awready }),  // input wire [4 : 0] m_axi_awready
-      .m_axi_wdata({    clock_decouple_ctrl_wdata,
-                        ctrl_iso_ctrl_wdata,
+      .m_axi_wdata({    clock_decouple_reg_ctrl_wdata,
+                        ctrl_iso_reg_ctrl_wdata,
                         net_iso_sync_ctrl_wdata,
                         axi_lite_s_ctrl_wdata }),      // output wire [159 : 0] m_axi_wdata
       .m_axi_wstrb({    axi_s3_wstrb_pad,
                         axi_s2_wstrb_pad,
                         axi_s1_wstrb_pad,
                         axi_lite_s_ctrl_wstrb }),      // output wire [19 : 0] m_axi_wstrb
-      .m_axi_wvalid({   clock_decouple_ctrl_wvalid,
-                        ctrl_iso_ctrl_wvalid,
+      .m_axi_wvalid({   clock_decouple_reg_ctrl_wvalid,
+                        ctrl_iso_reg_ctrl_wvalid,
                         net_iso_sync_ctrl_wvalid,
                         axi_lite_s_ctrl_wvalid }),    // output wire [4 : 0] m_axi_wvalid
-      .m_axi_wready({   clock_decouple_ctrl_wready,
-                        ctrl_iso_ctrl_wready,
+      .m_axi_wready({   clock_decouple_reg_ctrl_wready,
+                        ctrl_iso_reg_ctrl_wready,
                         net_iso_sync_ctrl_wready,
                         axi_lite_s_ctrl_wready }),    // input wire [4 : 0] m_axi_wready
-      .m_axi_bresp({    clock_decouple_ctrl_bresp,
-                        ctrl_iso_ctrl_bresp,
+      .m_axi_bresp({    clock_decouple_reg_ctrl_bresp,
+                        ctrl_iso_reg_ctrl_bresp,
                         net_iso_sync_ctrl_bresp,
                         axi_lite_s_ctrl_bresp }),      // input wire [9 : 0] m_axi_bresp
-      .m_axi_bvalid({   clock_decouple_ctrl_bvalid,
-                        ctrl_iso_ctrl_bvalid,
+      .m_axi_bvalid({   clock_decouple_reg_ctrl_bvalid,
+                        ctrl_iso_reg_ctrl_bvalid,
                         net_iso_sync_ctrl_bvalid,
                         axi_lite_s_ctrl_bvalid }),    // input wire [4 : 0] m_axi_bvalid
-      .m_axi_bready({   clock_decouple_ctrl_bready,
-                        ctrl_iso_ctrl_bready,
+      .m_axi_bready({   clock_decouple_reg_ctrl_bready,
+                        ctrl_iso_reg_ctrl_bready,
                         net_iso_sync_ctrl_bready,
                         axi_lite_s_ctrl_bready }),    // output wire [4 : 0] m_axi_bready
-      .m_axi_araddr({   clock_decouple_ctrl_araddr,
-                        ctrl_iso_ctrl_araddr,
+      .m_axi_araddr({   clock_decouple_reg_ctrl_araddr,
+                        ctrl_iso_reg_ctrl_araddr,
                         net_iso_sync_ctrl_araddr,
                         axi_lite_s_ctrl_araddr }),    // output wire [104 : 0] m_axi_araddr
       .m_axi_arprot( ),                       // output wire [14 : 0] m_axi_arprot
-      .m_axi_arvalid({  clock_decouple_ctrl_arvalid,
-                        ctrl_iso_ctrl_arvalid,
+      .m_axi_arvalid({  clock_decouple_reg_ctrl_arvalid,
+                        ctrl_iso_reg_ctrl_arvalid,
                         net_iso_sync_ctrl_arvalid,
                         axi_lite_s_ctrl_arvalid }),  // output wire [4 : 0] m_axi_arvalid
-      .m_axi_arready({  clock_decouple_ctrl_arready,
-                        ctrl_iso_ctrl_arready,
+      .m_axi_arready({  clock_decouple_reg_ctrl_arready,
+                        ctrl_iso_reg_ctrl_arready,
                         net_iso_sync_ctrl_arready,
                         axi_lite_s_ctrl_arready }),  // input wire [4 : 0] m_axi_arready
-      .m_axi_rdata({    clock_decouple_ctrl_rdata,
-                        ctrl_iso_ctrl_rdata,
+      .m_axi_rdata({    clock_decouple_reg_ctrl_rdata,
+                        ctrl_iso_reg_ctrl_rdata,
                         net_iso_sync_ctrl_rdata,
                         axi_lite_s_ctrl_rdata }),      // input wire [159 : 0] m_axi_rdata
-      .m_axi_rresp({    clock_decouple_ctrl_rresp,
-                        ctrl_iso_ctrl_rresp,
+      .m_axi_rresp({    clock_decouple_reg_ctrl_rresp,
+                        ctrl_iso_reg_ctrl_rresp,
                         net_iso_sync_ctrl_rresp,
                         axi_lite_s_ctrl_rresp }),      // input wire [9 : 0] m_axi_rresp
-      .m_axi_rvalid({   clock_decouple_ctrl_rvalid,
-                        ctrl_iso_ctrl_rvalid,
+      .m_axi_rvalid({   clock_decouple_reg_ctrl_rvalid,
+                        ctrl_iso_reg_ctrl_rvalid,
                         net_iso_sync_ctrl_rvalid,
                         axi_lite_s_ctrl_rvalid }),    // input wire [4 : 0] m_axi_rvalid
-      .m_axi_rready({   clock_decouple_ctrl_rready,
-                        ctrl_iso_ctrl_rready,
+      .m_axi_rready({   clock_decouple_reg_ctrl_rready,
+                        ctrl_iso_reg_ctrl_rready,
                         net_iso_sync_ctrl_rready,
                         axi_lite_s_ctrl_rready })    // output wire [4 : 0] m_axi_rready
     );
