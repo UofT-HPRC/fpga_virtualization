@@ -505,12 +505,12 @@ module net_iso_top
     //   Final Input Assignment (with Reg Slice)              //
     //--------------------------------------------------------//
 
-    //TX register slice
+    //RX register slice
     reg_slice_full
     #(
         .DATA_WIDTH(AXIS_BUS_WIDTH + AXIS_ID_WIDTH + (AXIS_BUS_WIDTH/8) + 1)
     )
-    tx_reg_slice
+    rx_reg_slice
     (
         .in_data    ( { axis_rx_s_tdata,
                         axis_rx_s_tdest,
