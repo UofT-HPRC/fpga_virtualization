@@ -207,6 +207,7 @@ proc create_hier_cell_qsfp0 { parentCell nameHier } {
    CONFIG.MMCM_CLKIN1_PERIOD {3.333} \
    CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
    CONFIG.MMCM_CLKOUT0_DIVIDE_F {16.000} \
+   CONFIG.MMCM_DIVCLK_DIVIDE {1} \
    CONFIG.PRIM_SOURCE {Differential_clock_capable_pin} \
    CONFIG.RESET_PORT {reset} \
    CONFIG.RESET_TYPE {ACTIVE_HIGH} \
@@ -401,9 +402,9 @@ proc create_hier_cell_pcie { parentCell nameHier } {
   set xdma_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xdma:4.1 xdma_0 ]
   set_property -dict [ list \
    CONFIG.PCIE_BOARD_INTERFACE {pci_express_x1} \
-   CONFIG.PF0_DEVICE_ID_mqdma {9031} \
-   CONFIG.PF2_DEVICE_ID_mqdma {9031} \
-   CONFIG.PF3_DEVICE_ID_mqdma {9031} \
+   CONFIG.PF0_DEVICE_ID_mqdma {9011} \
+   CONFIG.PF2_DEVICE_ID_mqdma {9011} \
+   CONFIG.PF3_DEVICE_ID_mqdma {9011} \
    CONFIG.SYS_RST_N_BOARD_INTERFACE {pcie_perstn} \
    CONFIG.axi_addr_width {64} \
    CONFIG.axi_data_width {64_bit} \
@@ -411,16 +412,18 @@ proc create_hier_cell_pcie { parentCell nameHier } {
    CONFIG.axilite_master_en {true} \
    CONFIG.axilite_master_size {16} \
    CONFIG.axist_bypass_en {false} \
-   CONFIG.axisten_freq {125} \
+   CONFIG.axisten_freq {62.5} \
    CONFIG.cfg_ext_if {false} \
    CONFIG.cfg_mgmt_if {false} \
    CONFIG.coreclk_freq {250} \
+   CONFIG.dsc_bypass_rd {0000} \
    CONFIG.en_gt_selection {true} \
    CONFIG.enable_pcie_debug {False} \
    CONFIG.functional_mode {DMA} \
    CONFIG.mcap_enablement {None} \
    CONFIG.mode_selection {Advanced} \
-   CONFIG.pf0_device_id {9031} \
+   CONFIG.pcie_extended_tag {false} \
+   CONFIG.pf0_device_id {9011} \
    CONFIG.pf0_interrupt_pin {INTA} \
    CONFIG.pf0_msi_enabled {false} \
    CONFIG.pf0_msix_cap_pba_bir {BAR_1} \
@@ -434,16 +437,16 @@ proc create_hier_cell_pcie { parentCell nameHier } {
    CONFIG.pf1_rbar_cap_bar0 {0x00000000fff0} \
    CONFIG.pf2_rbar_cap_bar0 {0x00000000fff0} \
    CONFIG.pf3_rbar_cap_bar0 {0x00000000fff0} \
-   CONFIG.pl_link_cap_max_link_speed {8.0_GT/s} \
+   CONFIG.pl_link_cap_max_link_speed {2.5_GT/s} \
    CONFIG.pl_link_cap_max_link_width {X1} \
-   CONFIG.plltype {QPLL1} \
+   CONFIG.plltype {CPLL} \
    CONFIG.xdma_axi_intf_mm {AXI_Memory_Mapped} \
    CONFIG.xdma_axilite_slave {false} \
    CONFIG.xdma_num_usr_irq {1} \
-   CONFIG.xdma_rnum_chnl {2} \
-   CONFIG.xdma_rnum_rids {4} \
-   CONFIG.xdma_wnum_chnl {2} \
-   CONFIG.xdma_wnum_rids {4} \
+   CONFIG.xdma_rnum_chnl {1} \
+   CONFIG.xdma_rnum_rids {2} \
+   CONFIG.xdma_wnum_chnl {1} \
+   CONFIG.xdma_wnum_rids {2} \
  ] $xdma_0
 
   # Create instance: xlconcat_0, and set properties
@@ -583,7 +586,7 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {32} \
    CONFIG.DATA_WIDTH {32} \
-   CONFIG.FREQ_HZ {125000000} \
+   CONFIG.FREQ_HZ {62500000} \
    CONFIG.HAS_BURST {0} \
    CONFIG.HAS_CACHE {0} \
    CONFIG.HAS_LOCK {0} \
@@ -641,13 +644,25 @@ proc create_root_design { parentCell } {
   set axi_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_register_slice:2.1 axi_register_slice_0 ]
   set_property -dict [ list \
    CONFIG.NUM_SLR_CROSSINGS {0} \
-   CONFIG.REG_AR {15} \
-   CONFIG.REG_AW {15} \
-   CONFIG.REG_B {15} \
-   CONFIG.REG_R {15} \
-   CONFIG.REG_W {15} \
+   CONFIG.REG_AR {7} \
+   CONFIG.REG_AW {7} \
+   CONFIG.REG_B {7} \
+   CONFIG.REG_R {7} \
+   CONFIG.REG_W {7} \
    CONFIG.USE_AUTOPIPELINING {1} \
  ] $axi_register_slice_0
+
+  # Create instance: axis_register_slice_0, and set properties
+  set axis_register_slice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_0 ]
+  set_property -dict [ list \
+   CONFIG.REG_CONFIG {1} \
+ ] $axis_register_slice_0
+
+  # Create instance: axis_register_slice_1, and set properties
+  set axis_register_slice_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 axis_register_slice_1 ]
+  set_property -dict [ list \
+   CONFIG.REG_CONFIG {12} \
+ ] $axis_register_slice_1
 
   # Create instance: bram
   create_hier_cell_bram [current_bd_instance .] bram
@@ -660,12 +675,14 @@ proc create_root_design { parentCell } {
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_register_slice_0_M_AXI [get_bd_intf_ports M_AXI_LITE] [get_bd_intf_pins axi_register_slice_0/M_AXI]
-  connect_bd_intf_net -intf_net axis_tx_1 [get_bd_intf_ports axis_tx] [get_bd_intf_pins qsfp0/axis_tx]
+  connect_bd_intf_net -intf_net axis_register_slice_0_M_AXIS [get_bd_intf_ports axis_rx] [get_bd_intf_pins axis_register_slice_0/M_AXIS]
+  connect_bd_intf_net -intf_net axis_register_slice_1_M_AXIS [get_bd_intf_pins axis_register_slice_1/M_AXIS] [get_bd_intf_pins qsfp0/axis_tx]
+  connect_bd_intf_net -intf_net axis_tx_1 [get_bd_intf_ports axis_tx] [get_bd_intf_pins axis_register_slice_1/S_AXIS]
   connect_bd_intf_net -intf_net pcie_M_AXI [get_bd_intf_pins bram/S_AXI] [get_bd_intf_pins pcie/M_AXI]
   connect_bd_intf_net -intf_net pcie_M_AXI_LITE [get_bd_intf_pins axi_register_slice_0/S_AXI] [get_bd_intf_pins pcie/M_AXI_LITE]
   connect_bd_intf_net -intf_net pcie_refclk_1 [get_bd_intf_ports pcie_refclk] [get_bd_intf_pins pcie/pcie_refclk]
   connect_bd_intf_net -intf_net qsfp0_156mhz_0_1 [get_bd_intf_ports qsfp0_156mhz] [get_bd_intf_pins qsfp0/qsfp0_156mhz_0]
-  connect_bd_intf_net -intf_net qsfp0_axis_rx [get_bd_intf_ports axis_rx] [get_bd_intf_pins qsfp0/axis_rx]
+  connect_bd_intf_net -intf_net qsfp0_axis_rx [get_bd_intf_pins axis_register_slice_0/S_AXIS] [get_bd_intf_pins qsfp0/axis_rx]
   connect_bd_intf_net -intf_net qsfp0_qsfp0_1x_0 [get_bd_intf_ports qsfp0_1x] [get_bd_intf_pins qsfp0/qsfp0_1x_0]
   connect_bd_intf_net -intf_net refclk_300M_1 [get_bd_intf_ports refclk_300mhz] [get_bd_intf_pins qsfp0/refclk_300mhz]
   connect_bd_intf_net -intf_net xdma_0_pcie_mgt [get_bd_intf_ports pci_express_x1] [get_bd_intf_pins pcie/pci_express_x1]
@@ -674,8 +691,8 @@ proc create_root_design { parentCell } {
   connect_bd_net -net pcie_axi_aclk [get_bd_ports pcie_aclk] [get_bd_pins axi_register_slice_0/aclk] [get_bd_pins bram/s_axi_aclk] [get_bd_pins pcie/axi_aclk]
   connect_bd_net -net pcie_axi_aresetn [get_bd_ports pcie_aresetn] [get_bd_pins axi_register_slice_0/aresetn] [get_bd_pins bram/s_axi_aresetn] [get_bd_pins pcie/axi_aresetn] [get_bd_pins qsfp0/aresetn_in]
   connect_bd_net -net pcie_perstn_1 [get_bd_ports pcie_perstn] [get_bd_pins pcie/pcie_perstn]
-  connect_bd_net -net qsfp0_aclk [get_bd_ports qsfp0_aclk] [get_bd_pins qsfp0/aclk]
-  connect_bd_net -net qsfp0_aresetn_out [get_bd_ports qsfp0_aresetn] [get_bd_pins qsfp0/aresetn_out]
+  connect_bd_net -net qsfp0_aclk [get_bd_ports qsfp0_aclk] [get_bd_pins axis_register_slice_0/aclk] [get_bd_pins axis_register_slice_1/aclk] [get_bd_pins qsfp0/aclk]
+  connect_bd_net -net qsfp0_aresetn_out [get_bd_ports qsfp0_aresetn] [get_bd_pins axis_register_slice_0/aresetn] [get_bd_pins axis_register_slice_1/aresetn] [get_bd_pins qsfp0/aresetn_out]
 
   # Create address segments
   create_bd_addr_seg -range 0x01000000 -offset 0x00000000 [get_bd_addr_spaces pcie/xdma_0/M_AXI_LITE] [get_bd_addr_segs M_AXI_LITE/Reg] SEG_M_AXI_LITE_Reg

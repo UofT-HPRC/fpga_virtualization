@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Mar 25 12:35:20 2020" VIVADOVERSION="2019.1.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Apr  8 08:52:45 2020" VIVADOVERSION="2019.1.3">
 
   <SYSTEMINFO ARCH="virtexuplus" BOARD="xilinx.com:au200:part0:1.3" DEVICE="xcu200" NAME="phy_bd" PACKAGE="fsgd2104" SPEEDGRADE="-2"/>
 
@@ -9,7 +9,7 @@
         <CONNECTION INSTANCE="pcie_xdma_0" PORT="sys_rst_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT CLKFREQUENCY="125000000" DIR="O" NAME="pcie_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
+    <PORT CLKFREQUENCY="62500000" DIR="O" NAME="pcie_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
       <CONNECTIONS>
         <CONNECTION INSTANCE="pcie_xdma_0" PORT="axi_aclk"/>
       </CONNECTIONS>
@@ -29,14 +29,59 @@
         <CONNECTION INSTANCE="qsfp0_util_reduced_logic_0" PORT="Res"/>
       </CONNECTIONS>
     </PORT>
-    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="refclk_300mhz_clk_n" SIGIS="clk" SIGNAME="qsfp0_clk_wiz_0_clk_in1_n">
+    <PORT DIR="O" NAME="axis_rx_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tvalid">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_clk_wiz_0" PORT="clk_in1_n"/>
+        <CONNECTION INSTANCE="axis_register_slice_0" PORT="m_axis_tvalid"/>
       </CONNECTIONS>
     </PORT>
-    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="refclk_300mhz_clk_p" SIGIS="clk" SIGNAME="qsfp0_clk_wiz_0_clk_in1_p">
+    <PORT DIR="O" LEFT="63" NAME="axis_rx_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tdata">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_clk_wiz_0" PORT="clk_in1_p"/>
+        <CONNECTION INSTANCE="axis_register_slice_0" PORT="m_axis_tdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="7" NAME="axis_rx_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tkeep">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_0" PORT="m_axis_tkeep"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="axis_rx_tlast" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tlast">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_0" PORT="m_axis_tlast"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="axis_rx_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tuser">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_0" PORT="m_axis_tuser"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="axis_tx_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="axis_tx_tready" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="63" NAME="axis_tx_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tdata">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="7" NAME="axis_tx_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tkeep">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tkeep"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="axis_tx_tlast" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tlast">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tlast"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="axis_tx_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tuser">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axis_register_slice_1" PORT="s_axis_tuser"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="qsfp0_1x_grx_n" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_gt_rxn_in">
@@ -154,59 +199,14 @@
         <CONNECTION INSTANCE="axi_register_slice_0" PORT="m_axi_wvalid"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="63" NAME="axis_rx_tdata" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tdata_0">
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="refclk_300mhz_clk_n" SIGIS="clk" SIGNAME="qsfp0_clk_wiz_0_clk_in1_n">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tdata_0"/>
+        <CONNECTION INSTANCE="qsfp0_clk_wiz_0" PORT="clk_in1_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="7" NAME="axis_rx_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tkeep_0">
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="refclk_300mhz_clk_p" SIGIS="clk" SIGNAME="qsfp0_clk_wiz_0_clk_in1_p">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tkeep_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="axis_rx_tlast" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tlast_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tlast_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="axis_rx_tuser" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tuser_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tuser_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="axis_rx_tvalid" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tvalid_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tvalid_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" LEFT="63" NAME="axis_tx_tdata" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tdata_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tdata_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" LEFT="7" NAME="axis_tx_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tkeep_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tkeep_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" NAME="axis_tx_tlast" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tlast_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tlast_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="axis_tx_tready" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tready_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tready_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" NAME="axis_tx_tuser" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tuser_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tuser_0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" NAME="axis_tx_tvalid" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tvalid_0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tvalid_0"/>
+        <CONNECTION INSTANCE="qsfp0_clk_wiz_0" PORT="clk_in1_p"/>
       </CONNECTIONS>
     </PORT>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="pcie_refclk_clk_p" SIGIS="clk" SIGNAME="pcie_util_ds_buf_0_IBUF_DS_P">
@@ -217,6 +217,16 @@
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="pcie_refclk_clk_n" SIGIS="clk" SIGNAME="pcie_util_ds_buf_0_IBUF_DS_N">
       <CONNECTIONS>
         <CONNECTION INSTANCE="pcie_util_ds_buf_0" PORT="IBUF_DS_N"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="qsfp0_156mhz_clk_n" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_gt_refclk_n">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="gt_refclk_n"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="qsfp0_156mhz_clk_p" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_gt_refclk_p">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="gt_refclk_p"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="pci_express_x1_rxn" SIGIS="undef" SIGNAME="pcie_xdma_0_pci_exp_rxn">
@@ -237,16 +247,6 @@
     <PORT DIR="O" NAME="pci_express_x1_txp" SIGIS="undef" SIGNAME="pcie_xdma_0_pci_exp_txp">
       <CONNECTIONS>
         <CONNECTION INSTANCE="pcie_xdma_0" PORT="pci_exp_txp"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="qsfp0_156mhz_clk_n" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_gt_refclk_n">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="gt_refclk_n"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="qsfp0_156mhz_clk_p" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_gt_refclk_p">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="gt_refclk_p"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -296,7 +296,7 @@
     <BUSINTERFACE BUSNAME="axi_register_slice_0_M_AXI" DATAWIDTH="32" NAME="M_AXI_LITE" TYPE="MASTER">
       <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
       <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
-      <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
       <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
       <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
       <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -347,7 +347,7 @@
         <PORTMAP LOGICAL="WVALID" PHYSICAL="M_AXI_LITE_wvalid"/>
       </PORTMAPS>
     </BUSINTERFACE>
-    <BUSINTERFACE BUSNAME="qsfp0_xxv_ethernet_1_axis_rx_0" NAME="axis_rx" TYPE="INITIATOR">
+    <BUSINTERFACE BUSNAME="axis_register_slice_0_M_AXIS" NAME="axis_rx" TYPE="MASTER">
       <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
       <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
       <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -362,14 +362,14 @@
       <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
       <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
       <PORTMAPS>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="axis_rx_tvalid"/>
         <PORTMAP LOGICAL="TDATA" PHYSICAL="axis_rx_tdata"/>
         <PORTMAP LOGICAL="TKEEP" PHYSICAL="axis_rx_tkeep"/>
         <PORTMAP LOGICAL="TLAST" PHYSICAL="axis_rx_tlast"/>
         <PORTMAP LOGICAL="TUSER" PHYSICAL="axis_rx_tuser"/>
-        <PORTMAP LOGICAL="TVALID" PHYSICAL="axis_rx_tvalid"/>
       </PORTMAPS>
     </BUSINTERFACE>
-    <BUSINTERFACE BUSNAME="External_Interface_axis_tx" NAME="axis_tx" TYPE="TARGET">
+    <BUSINTERFACE BUSNAME="External_Interface_axis_tx" NAME="axis_tx" TYPE="SLAVE">
       <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
       <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
       <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -384,12 +384,12 @@
       <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
       <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
       <PORTMAPS>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="axis_tx_tvalid"/>
+        <PORTMAP LOGICAL="TREADY" PHYSICAL="axis_tx_tready"/>
         <PORTMAP LOGICAL="TDATA" PHYSICAL="axis_tx_tdata"/>
         <PORTMAP LOGICAL="TKEEP" PHYSICAL="axis_tx_tkeep"/>
         <PORTMAP LOGICAL="TLAST" PHYSICAL="axis_tx_tlast"/>
-        <PORTMAP LOGICAL="TREADY" PHYSICAL="axis_tx_tready"/>
         <PORTMAP LOGICAL="TUSER" PHYSICAL="axis_tx_tuser"/>
-        <PORTMAP LOGICAL="TVALID" PHYSICAL="axis_tx_tvalid"/>
       </PORTMAPS>
     </BUSINTERFACE>
   </EXTERNALINTERFACES>
@@ -411,11 +411,11 @@
         <PARAMETER NAME="C_AXI_WUSER_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_AXI_RUSER_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_AXI_BUSER_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="C_REG_CONFIG_AW" VALUE="16"/>
-        <PARAMETER NAME="C_REG_CONFIG_W" VALUE="16"/>
-        <PARAMETER NAME="C_REG_CONFIG_B" VALUE="16"/>
-        <PARAMETER NAME="C_REG_CONFIG_AR" VALUE="16"/>
-        <PARAMETER NAME="C_REG_CONFIG_R" VALUE="16"/>
+        <PARAMETER NAME="C_REG_CONFIG_AW" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_W" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_B" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_AR" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_R" VALUE="7"/>
         <PARAMETER NAME="C_NUM_SLR_CROSSINGS" VALUE="0"/>
         <PARAMETER NAME="C_PIPELINES_MASTER_AW" VALUE="0"/>
         <PARAMETER NAME="C_PIPELINES_MASTER_W" VALUE="0"/>
@@ -442,11 +442,11 @@
         <PARAMETER NAME="RUSER_WIDTH" VALUE="0"/>
         <PARAMETER NAME="WUSER_WIDTH" VALUE="0"/>
         <PARAMETER NAME="BUSER_WIDTH" VALUE="0"/>
-        <PARAMETER NAME="REG_AW" VALUE="15"/>
-        <PARAMETER NAME="REG_AR" VALUE="15"/>
-        <PARAMETER NAME="REG_W" VALUE="15"/>
-        <PARAMETER NAME="REG_R" VALUE="15"/>
-        <PARAMETER NAME="REG_B" VALUE="15"/>
+        <PARAMETER NAME="REG_AW" VALUE="7"/>
+        <PARAMETER NAME="REG_AR" VALUE="7"/>
+        <PARAMETER NAME="REG_W" VALUE="7"/>
+        <PARAMETER NAME="REG_R" VALUE="7"/>
+        <PARAMETER NAME="REG_B" VALUE="7"/>
         <PARAMETER NAME="NUM_SLR_CROSSINGS" VALUE="0"/>
         <PARAMETER NAME="PIPELINES_MASTER_AW" VALUE="0"/>
         <PARAMETER NAME="PIPELINES_SLAVE_AW" VALUE="0"/>
@@ -485,7 +485,7 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
       </PARAMETERS>
       <PORTS>
-        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
+        <PORT CLKFREQUENCY="62500000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
           <CONNECTIONS>
             <CONNECTION INSTANCE="pcie_xdma_0" PORT="axi_aclk"/>
           </CONNECTIONS>
@@ -690,7 +690,7 @@
         <BUSINTERFACE BUSNAME="axi_register_slice_0_M_AXI" DATAWIDTH="32" NAME="M_AXI" TYPE="MASTER" VLNV="xilinx.com:interface:aximm:1.0">
           <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
           <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
-          <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
           <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
           <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
           <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -744,7 +744,7 @@
         <BUSINTERFACE BUSNAME="pcie_xdma_0_M_AXI_LITE" DATAWIDTH="32" NAME="S_AXI" TYPE="SLAVE" VLNV="xilinx.com:interface:aximm:1.0">
           <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
           <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
-          <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
           <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
           <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
           <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -793,6 +793,302 @@
             <PORTMAP LOGICAL="WREADY" PHYSICAL="s_axi_wready"/>
             <PORTMAP LOGICAL="WSTRB" PHYSICAL="s_axi_wstrb"/>
             <PORTMAP LOGICAL="WVALID" PHYSICAL="s_axi_wvalid"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE COREREVISION="19" FULLNAME="/axis_register_slice_0" HWVERSION="1.1" INSTANCE="axis_register_slice_0" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axis_register_slice" VLNV="xilinx.com:ip:axis_register_slice:1.1">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="https://www.xilinx.com/cgi-bin/docs/ipdoc?c=axis_register_slice;v=v1_1;d=pg085-axi4stream-infrastructure.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_FAMILY" VALUE="virtexuplus"/>
+        <PARAMETER NAME="C_AXIS_TDATA_WIDTH" VALUE="64"/>
+        <PARAMETER NAME="C_AXIS_TID_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_TDEST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_TUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_SIGNAL_SET" VALUE="0b00000000000000000000000010011010"/>
+        <PARAMETER NAME="C_REG_CONFIG" VALUE="10"/>
+        <PARAMETER NAME="C_NUM_SLR_CROSSINGS" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_MASTER" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_SLAVE" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_MIDDLE" VALUE="0"/>
+        <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+        <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="REG_CONFIG" VALUE="1"/>
+        <PARAMETER NAME="HAS_TREADY" VALUE="0"/>
+        <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+        <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+        <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+        <PARAMETER NAME="HAS_ACLKEN" VALUE="0"/>
+        <PARAMETER NAME="NUM_SLR_CROSSINGS" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_MASTER" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_MIDDLE" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_SLAVE" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="phy_bd_axis_register_slice_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="156250000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_tx_clk_out_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_clk_out_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" SIGIS="rst" SIGNAME="qsfp0_util_reduced_logic_0_Res">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_util_reduced_logic_0" PORT="Res"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tvalid_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tdata_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="s_axis_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tkeep">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tkeep_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tlast_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axis_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tuser">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_axis_tuser_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="63" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="m_axis_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tkeep">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tkeep"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="m_axis_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_m_axis_tuser">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tuser"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="qsfp0_xxv_ethernet_1_axis_rx_0" NAME="S_AXIS" TYPE="SLAVE" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="0"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="156250000"/>
+          <PARAMETER NAME="PHASE" VALUE="0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xxv_ethernet_1_0_tx_clk_out_0"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="s_axis_tvalid"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="s_axis_tdata"/>
+            <PORTMAP LOGICAL="TKEEP" PHYSICAL="s_axis_tkeep"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="s_axis_tlast"/>
+            <PORTMAP LOGICAL="TUSER" PHYSICAL="s_axis_tuser"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="axis_register_slice_0_M_AXIS" NAME="M_AXIS" TYPE="MASTER" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="0"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="156250000"/>
+          <PARAMETER NAME="PHASE" VALUE="0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xxv_ethernet_1_0_tx_clk_out_0"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_tvalid"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="m_axis_tdata"/>
+            <PORTMAP LOGICAL="TKEEP" PHYSICAL="m_axis_tkeep"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="m_axis_tlast"/>
+            <PORTMAP LOGICAL="TUSER" PHYSICAL="m_axis_tuser"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE COREREVISION="19" FULLNAME="/axis_register_slice_1" HWVERSION="1.1" INSTANCE="axis_register_slice_1" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axis_register_slice" VLNV="xilinx.com:ip:axis_register_slice:1.1">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="https://www.xilinx.com/cgi-bin/docs/ipdoc?c=axis_register_slice;v=v1_1;d=pg085-axi4stream-infrastructure.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_FAMILY" VALUE="virtexuplus"/>
+        <PARAMETER NAME="C_AXIS_TDATA_WIDTH" VALUE="64"/>
+        <PARAMETER NAME="C_AXIS_TID_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_TDEST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_TUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXIS_SIGNAL_SET" VALUE="0b00000000000000000000000010011011"/>
+        <PARAMETER NAME="C_REG_CONFIG" VALUE="12"/>
+        <PARAMETER NAME="C_NUM_SLR_CROSSINGS" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_MASTER" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_SLAVE" VALUE="0"/>
+        <PARAMETER NAME="C_PIPELINES_MIDDLE" VALUE="0"/>
+        <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+        <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="REG_CONFIG" VALUE="12"/>
+        <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+        <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+        <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+        <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+        <PARAMETER NAME="HAS_ACLKEN" VALUE="0"/>
+        <PARAMETER NAME="NUM_SLR_CROSSINGS" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_MASTER" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_MIDDLE" VALUE="0"/>
+        <PARAMETER NAME="PIPELINES_SLAVE" VALUE="0"/>
+        <PARAMETER NAME="Component_Name" VALUE="phy_bd_axis_register_slice_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="156250000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_tx_clk_out_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_clk_out_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" SIGIS="rst" SIGNAME="qsfp0_util_reduced_logic_0_Res">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_util_reduced_logic_0" PORT="Res"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axis_tready" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="63" NAME="s_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="s_axis_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tkeep">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tkeep"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axis_tlast" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axis_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_s_axis_tuser">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tuser"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tvalid" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tvalid_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axis_tready" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tready_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="63" NAME="m_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tdata_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="m_axis_tkeep" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tkeep">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tkeep_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axis_tlast" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tlast_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="m_axis_tuser" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tuser">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="tx_axis_tuser_0"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="External_Interface_axis_tx" NAME="S_AXIS" TYPE="SLAVE" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="156250000"/>
+          <PARAMETER NAME="PHASE" VALUE="0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xxv_ethernet_1_0_tx_clk_out_0"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="s_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="s_axis_tready"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="s_axis_tdata"/>
+            <PORTMAP LOGICAL="TKEEP" PHYSICAL="s_axis_tkeep"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="s_axis_tlast"/>
+            <PORTMAP LOGICAL="TUSER" PHYSICAL="s_axis_tuser"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="axis_register_slice_1_M_AXIS" NAME="M_AXIS" TYPE="MASTER" VLNV="xilinx.com:interface:axis:1.0">
+          <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
+          <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+          <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+          <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+          <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="156250000"/>
+          <PARAMETER NAME="PHASE" VALUE="0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xxv_ethernet_1_0_tx_clk_out_0"/>
+          <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_tvalid"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="m_axis_tready"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="m_axis_tdata"/>
+            <PORTMAP LOGICAL="TKEEP" PHYSICAL="m_axis_tkeep"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="m_axis_tlast"/>
+            <PORTMAP LOGICAL="TUSER" PHYSICAL="m_axis_tuser"/>
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
@@ -1146,7 +1442,7 @@
         <PARAMETER NAME="C_S_AXI_HIGHADDR" VALUE="0xC0003FFF"/>
       </PARAMETERS>
       <PORTS>
-        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="s_axi_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
+        <PORT CLKFREQUENCY="62500000" DIR="I" NAME="s_axi_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
           <CONNECTIONS>
             <CONNECTION INSTANCE="pcie_xdma_0" PORT="axi_aclk"/>
           </CONNECTIONS>
@@ -1371,7 +1667,7 @@
         <BUSINTERFACE BUSNAME="pcie_xdma_0_M_AXI" DATAWIDTH="64" NAME="S_AXI" TYPE="SLAVE" VLNV="xilinx.com:interface:aximm:1.0">
           <PARAMETER NAME="DATA_WIDTH" VALUE="64"/>
           <PARAMETER NAME="PROTOCOL" VALUE="AXI4"/>
-          <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
           <PARAMETER NAME="ID_WIDTH" VALUE="2"/>
           <PARAMETER NAME="ADDR_WIDTH" VALUE="14"/>
           <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -1390,13 +1686,13 @@
           <PARAMETER NAME="HAS_BRESP" VALUE="1"/>
           <PARAMETER NAME="HAS_RRESP" VALUE="1"/>
           <PARAMETER NAME="SUPPORTS_NARROW_BURST" VALUE="0"/>
-          <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="4"/>
-          <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="4"/>
+          <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="2"/>
+          <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="2"/>
           <PARAMETER NAME="MAX_BURST_LENGTH" VALUE="256"/>
           <PARAMETER NAME="PHASE" VALUE="0.000"/>
           <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xdma_0_0_axi_aclk"/>
-          <PARAMETER NAME="NUM_READ_THREADS" VALUE="2"/>
-          <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="2"/>
+          <PARAMETER NAME="NUM_READ_THREADS" VALUE="1"/>
+          <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="1"/>
           <PARAMETER NAME="RUSER_BITS_PER_BYTE" VALUE="0"/>
           <PARAMETER NAME="WUSER_BITS_PER_BYTE" VALUE="0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
@@ -2468,7 +2764,7 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT CLKFREQUENCY="125000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
+        <PORT CLKFREQUENCY="62500000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
           <CONNECTIONS>
             <CONNECTION INSTANCE="pcie_xdma_0" PORT="axi_aclk"/>
           </CONNECTIONS>
@@ -2562,17 +2858,17 @@
         <PARAMETER NAME="TL_LEGACY_MODE_ENABLE" VALUE="false"/>
         <PARAMETER NAME="PCIE_BLK_LOCN" VALUE="8"/>
         <PARAMETER NAME="PL_LINK_CAP_MAX_LINK_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="PL_LINK_CAP_MAX_LINK_SPEED" VALUE="4"/>
+        <PARAMETER NAME="PL_LINK_CAP_MAX_LINK_SPEED" VALUE="1"/>
         <PARAMETER NAME="REF_CLK_FREQ" VALUE="0"/>
         <PARAMETER NAME="DRP_CLK_SEL" VALUE="0"/>
         <PARAMETER NAME="FREE_RUN_FREQ" VALUE="0"/>
         <PARAMETER NAME="AXI_ADDR_WIDTH" VALUE="64"/>
         <PARAMETER NAME="AXI_DATA_WIDTH" VALUE="64"/>
         <PARAMETER NAME="CORE_CLK_FREQ" VALUE="1"/>
-        <PARAMETER NAME="PLL_TYPE" VALUE="2"/>
-        <PARAMETER NAME="USER_CLK_FREQ" VALUE="1"/>
+        <PARAMETER NAME="PLL_TYPE" VALUE="0"/>
+        <PARAMETER NAME="USER_CLK_FREQ" VALUE="0"/>
         <PARAMETER NAME="SILICON_REV" VALUE="Pre-Production"/>
-        <PARAMETER NAME="PIPE_SIM" VALUE="false"/>
+        <PARAMETER NAME="PIPE_SIM" VALUE="FALSE"/>
         <PARAMETER NAME="EXT_CH_GT_DRP" VALUE="false"/>
         <PARAMETER NAME="PCIE3_DRP" VALUE="false"/>
         <PARAMETER NAME="DEDICATE_PERST" VALUE="false"/>
@@ -2580,21 +2876,21 @@
         <PARAMETER NAME="MCAP_ENABLEMENT" VALUE="NONE"/>
         <PARAMETER NAME="EXT_STARTUP_PRIMITIVE" VALUE="false"/>
         <PARAMETER NAME="PF0_VENDOR_ID" VALUE="0x10EE"/>
-        <PARAMETER NAME="PF0_DEVICE_ID" VALUE="0x9031"/>
+        <PARAMETER NAME="PF0_DEVICE_ID" VALUE="0x9011"/>
         <PARAMETER NAME="PF0_REVISION_ID" VALUE="0x00"/>
         <PARAMETER NAME="PF0_SUBSYSTEM_VENDOR_ID" VALUE="0x10EE"/>
         <PARAMETER NAME="PF0_SUBSYSTEM_ID" VALUE="0x0007"/>
         <PARAMETER NAME="PF0_CLASS_CODE" VALUE="0x070001"/>
         <PARAMETER NAME="PF1_VENDOR_ID" VALUE="0x10EE"/>
-        <PARAMETER NAME="PF1_DEVICE_ID" VALUE="0x9111"/>
+        <PARAMETER NAME="PF1_DEVICE_ID" VALUE="0x1041"/>
         <PARAMETER NAME="PF1_REVISION_ID" VALUE="0x00"/>
         <PARAMETER NAME="PF1_SUBSYSTEM_VENDOR_ID" VALUE="0x10EE"/>
         <PARAMETER NAME="PF1_SUBSYSTEM_ID" VALUE="0x0007"/>
         <PARAMETER NAME="PF1_CLASS_CODE" VALUE="0x070001"/>
-        <PARAMETER NAME="PF2_DEVICE_ID" VALUE="0x9211"/>
+        <PARAMETER NAME="PF2_DEVICE_ID" VALUE="0x1040"/>
         <PARAMETER NAME="PF2_REVISION_ID" VALUE="0x00"/>
         <PARAMETER NAME="PF2_SUBSYSTEM_ID" VALUE="0x0007"/>
-        <PARAMETER NAME="PF3_DEVICE_ID" VALUE="0x9311"/>
+        <PARAMETER NAME="PF3_DEVICE_ID" VALUE="0x1039"/>
         <PARAMETER NAME="PF3_REVISION_ID" VALUE="0x00"/>
         <PARAMETER NAME="PF3_SUBSYSTEM_ID" VALUE="0x0007"/>
         <PARAMETER NAME="AXILITE_MASTER_APERTURE_SIZE" VALUE="0x11"/>
@@ -2603,7 +2899,7 @@
         <PARAMETER NAME="XDMA_CONTROL" VALUE="0x4"/>
         <PARAMETER NAME="AXIST_BYPASS_APERTURE_SIZE" VALUE="0x0D"/>
         <PARAMETER NAME="AXIST_BYPASS_CONTROL" VALUE="0x0"/>
-        <PARAMETER NAME="PF0_INTERRUPT_PIN" VALUE="0x1"/>
+        <PARAMETER NAME="PF0_INTERRUPT_PIN" VALUE="001"/>
         <PARAMETER NAME="PF0_MSI_CAP_MULTIMSGCAP" VALUE="0"/>
         <PARAMETER NAME="C_COMP_TIMEOUT" VALUE="1"/>
         <PARAMETER NAME="C_TIMEOUT0_SEL" VALUE="0xE"/>
@@ -2617,7 +2913,7 @@
         <PARAMETER NAME="SHARED_LOGIC_GTC_7XG2" VALUE="false"/>
         <PARAMETER NAME="SHARED_LOGIC_CLK_7XG2" VALUE="false"/>
         <PARAMETER NAME="SHARED_LOGIC_BOTH_7XG2" VALUE="false"/>
-        <PARAMETER NAME="EN_TRANSCEIVER_STATUS_PORTS" VALUE="false"/>
+        <PARAMETER NAME="EN_TRANSCEIVER_STATUS_PORTS" VALUE="FALSE"/>
         <PARAMETER NAME="IS_BOARD_PROJECT" VALUE="1"/>
         <PARAMETER NAME="EN_GT_SELECTION" VALUE="TRUE"/>
         <PARAMETER NAME="SELECT_QUAD" VALUE="GTY_Quad_227"/>
@@ -2630,19 +2926,19 @@
         <PARAMETER NAME="XDMA_PCIE_64BIT_EN" VALUE="xdma_pcie_64bit_en"/>
         <PARAMETER NAME="XDMA_AXILITE_MASTER" VALUE="TRUE"/>
         <PARAMETER NAME="XDMA_AXIST_BYPASS" VALUE="FALSE"/>
-        <PARAMETER NAME="XDMA_RNUM_CHNL" VALUE="2"/>
-        <PARAMETER NAME="XDMA_WNUM_CHNL" VALUE="2"/>
+        <PARAMETER NAME="XDMA_RNUM_CHNL" VALUE="1"/>
+        <PARAMETER NAME="XDMA_WNUM_CHNL" VALUE="1"/>
         <PARAMETER NAME="XDMA_AXILITE_SLAVE" VALUE="FALSE"/>
         <PARAMETER NAME="XDMA_NUM_USR_IRQ" VALUE="1"/>
-        <PARAMETER NAME="XDMA_RNUM_RIDS" VALUE="4"/>
-        <PARAMETER NAME="XDMA_WNUM_RIDS" VALUE="4"/>
+        <PARAMETER NAME="XDMA_RNUM_RIDS" VALUE="2"/>
+        <PARAMETER NAME="XDMA_WNUM_RIDS" VALUE="2"/>
         <PARAMETER NAME="C_M_AXI_ID_WIDTH" VALUE="2"/>
         <PARAMETER NAME="C_AXIBAR_NUM" VALUE="1"/>
         <PARAMETER NAME="C_FAMILY" VALUE="virtexuplus"/>
-        <PARAMETER NAME="XDMA_NUM_PCIE_TAG" VALUE="256"/>
+        <PARAMETER NAME="XDMA_NUM_PCIE_TAG" VALUE="32"/>
         <PARAMETER NAME="EN_AXI_MASTER_IF" VALUE="TRUE"/>
         <PARAMETER NAME="EN_WCHNL_0" VALUE="TRUE"/>
-        <PARAMETER NAME="EN_WCHNL_1" VALUE="TRUE"/>
+        <PARAMETER NAME="EN_WCHNL_1" VALUE="FALSE"/>
         <PARAMETER NAME="EN_WCHNL_2" VALUE="FALSE"/>
         <PARAMETER NAME="EN_WCHNL_3" VALUE="FALSE"/>
         <PARAMETER NAME="EN_WCHNL_4" VALUE="FALSE"/>
@@ -2650,7 +2946,7 @@
         <PARAMETER NAME="EN_WCHNL_6" VALUE="FALSE"/>
         <PARAMETER NAME="EN_WCHNL_7" VALUE="FALSE"/>
         <PARAMETER NAME="EN_RCHNL_0" VALUE="TRUE"/>
-        <PARAMETER NAME="EN_RCHNL_1" VALUE="TRUE"/>
+        <PARAMETER NAME="EN_RCHNL_1" VALUE="FALSE"/>
         <PARAMETER NAME="EN_RCHNL_2" VALUE="FALSE"/>
         <PARAMETER NAME="EN_RCHNL_3" VALUE="FALSE"/>
         <PARAMETER NAME="EN_RCHNL_4" VALUE="FALSE"/>
@@ -2687,7 +2983,7 @@
         <PARAMETER NAME="EN_DEBUG_PORTS" VALUE="FALSE"/>
         <PARAMETER NAME="VU9P_BOARD" VALUE="FALSE"/>
         <PARAMETER NAME="ENABLE_JTAG_DBG" VALUE="FALSE"/>
-        <PARAMETER NAME="ENABLE_IBERT" VALUE="false"/>
+        <PARAMETER NAME="ENABLE_IBERT" VALUE="FALSE"/>
         <PARAMETER NAME="MM_SLAVE_EN" VALUE="0"/>
         <PARAMETER NAME="DMA_EN" VALUE="1"/>
         <PARAMETER NAME="C_AXIBAR_0" VALUE="0x0000000000000000"/>
@@ -2749,7 +3045,7 @@
         <PARAMETER NAME="AXIS_PIPE_LINE_STAGE" VALUE="0"/>
         <PARAMETER NAME="MULT_PF_DES" VALUE="FALSE"/>
         <PARAMETER NAME="PF_SWAP" VALUE="FALSE"/>
-        <PARAMETER NAME="RUNBIT_FIX" VALUE="FALSE"/>
+        <PARAMETER NAME="RUNBIT_FIX" VALUE="false"/>
         <PARAMETER NAME="xlnx_ref_board" VALUE="AU200"/>
         <PARAMETER NAME="GTWIZ_IN_CORE" VALUE="1"/>
         <PARAMETER NAME="GTCOM_IN_CORE" VALUE="2"/>
@@ -2760,7 +3056,7 @@
         <PARAMETER NAME="PF1_BAR0_APERTURE_SIZE" VALUE="0x12"/>
         <PARAMETER NAME="PF1_BAR0_CONTROL" VALUE="0x4"/>
         <PARAMETER NAME="PF1_BAR1_APERTURE_SIZE" VALUE="0x0A"/>
-        <PARAMETER NAME="PF1_BAR1_CONTROL" VALUE="0x0"/>
+        <PARAMETER NAME="PF1_BAR1_CONTROL" VALUE="0x4"/>
         <PARAMETER NAME="PF1_BAR2_APERTURE_SIZE" VALUE="0x0A"/>
         <PARAMETER NAME="PF1_BAR2_CONTROL" VALUE="0x6"/>
         <PARAMETER NAME="PF1_BAR3_APERTURE_SIZE" VALUE="0x0A"/>
@@ -2822,8 +3118,8 @@
         <PARAMETER NAME="VF_BARLITE_INT_PF1" VALUE="0x01"/>
         <PARAMETER NAME="VF_BARLITE_INT_PF2" VALUE="0x01"/>
         <PARAMETER NAME="VF_BARLITE_INT_PF3" VALUE="0x01"/>
-        <PARAMETER NAME="C_C2H_NUM_CHNL" VALUE="2"/>
-        <PARAMETER NAME="C_H2C_NUM_CHNL" VALUE="2"/>
+        <PARAMETER NAME="C_C2H_NUM_CHNL" VALUE="1"/>
+        <PARAMETER NAME="C_H2C_NUM_CHNL" VALUE="1"/>
         <PARAMETER NAME="H2C_XDMA_CHNL" VALUE="0x0F"/>
         <PARAMETER NAME="C2H_XDMA_CHNL" VALUE="0x0F"/>
         <PARAMETER NAME="AXISTEN_IF_ENABLE_MSG_ROUTE" VALUE="0x00000"/>
@@ -2858,13 +3154,13 @@
         <PARAMETER NAME="device_port_type" VALUE="PCI_Express_Endpoint_device"/>
         <PARAMETER NAME="pcie_blk_locn" VALUE="X1Y2"/>
         <PARAMETER NAME="pl_link_cap_max_link_width" VALUE="X1"/>
-        <PARAMETER NAME="pl_link_cap_max_link_speed" VALUE="8.0_GT/s"/>
+        <PARAMETER NAME="pl_link_cap_max_link_speed" VALUE="2.5_GT/s"/>
         <PARAMETER NAME="ref_clk_freq" VALUE="100_MHz"/>
         <PARAMETER NAME="drp_clk_sel" VALUE="Internal"/>
         <PARAMETER NAME="free_run_freq" VALUE="100_MHz"/>
         <PARAMETER NAME="axi_addr_width" VALUE="64"/>
         <PARAMETER NAME="axi_data_width" VALUE="64_bit"/>
-        <PARAMETER NAME="axisten_freq" VALUE="125"/>
+        <PARAMETER NAME="axisten_freq" VALUE="62.5"/>
         <PARAMETER NAME="en_axi_slave_if" VALUE="true"/>
         <PARAMETER NAME="en_axi_master_if" VALUE="true"/>
         <PARAMETER NAME="pipe_sim" VALUE="false"/>
@@ -2877,7 +3173,7 @@
         <PARAMETER NAME="ext_startup_primitive" VALUE="false"/>
         <PARAMETER NAME="enable_code" VALUE="0000"/>
         <PARAMETER NAME="vendor_id" VALUE="10EE"/>
-        <PARAMETER NAME="pf0_device_id" VALUE="9031"/>
+        <PARAMETER NAME="pf0_device_id" VALUE="9011"/>
         <PARAMETER NAME="pf0_revision_id" VALUE="00"/>
         <PARAMETER NAME="pf0_subsystem_vendor_id" VALUE="10EE"/>
         <PARAMETER NAME="pf0_subsystem_id" VALUE="0007"/>
@@ -2916,12 +3212,12 @@
         <PARAMETER NAME="Shared_Logic_Clk_7xG2" VALUE="false"/>
         <PARAMETER NAME="Shared_Logic_Both_7xG2" VALUE="false"/>
         <PARAMETER NAME="en_transceiver_status_ports" VALUE="false"/>
-        <PARAMETER NAME="xdma_rnum_chnl" VALUE="2"/>
-        <PARAMETER NAME="xdma_wnum_chnl" VALUE="2"/>
+        <PARAMETER NAME="xdma_rnum_chnl" VALUE="1"/>
+        <PARAMETER NAME="xdma_wnum_chnl" VALUE="1"/>
         <PARAMETER NAME="xdma_axilite_slave" VALUE="false"/>
         <PARAMETER NAME="xdma_num_usr_irq" VALUE="1"/>
-        <PARAMETER NAME="xdma_rnum_rids" VALUE="4"/>
-        <PARAMETER NAME="xdma_wnum_rids" VALUE="4"/>
+        <PARAMETER NAME="xdma_rnum_rids" VALUE="2"/>
+        <PARAMETER NAME="xdma_wnum_rids" VALUE="2"/>
         <PARAMETER NAME="SYS_RST_N_BOARD_INTERFACE" VALUE="pcie_perstn"/>
         <PARAMETER NAME="PCIE_BOARD_INTERFACE" VALUE="pci_express_x1"/>
         <PARAMETER NAME="en_gt_selection" VALUE="true"/>
@@ -2931,13 +3227,13 @@
         <PARAMETER NAME="INS_LOSS_NYQ" VALUE="15"/>
         <PARAMETER NAME="PHY_LP_TXPRESET" VALUE="4"/>
         <PARAMETER NAME="coreclk_freq" VALUE="250"/>
-        <PARAMETER NAME="plltype" VALUE="QPLL1"/>
+        <PARAMETER NAME="plltype" VALUE="CPLL"/>
         <PARAMETER NAME="xdma_axi_intf_mm" VALUE="AXI_Memory_Mapped"/>
         <PARAMETER NAME="xdma_pcie_64bit_en" VALUE="false"/>
         <PARAMETER NAME="silicon_rev" VALUE="Pre-Production"/>
         <PARAMETER NAME="xdma_dsc_bypass" VALUE="false"/>
         <PARAMETER NAME="performance" VALUE="false"/>
-        <PARAMETER NAME="pcie_extended_tag" VALUE="true"/>
+        <PARAMETER NAME="pcie_extended_tag" VALUE="false"/>
         <PARAMETER NAME="rx_detect" VALUE="Default"/>
         <PARAMETER NAME="pf0_link_status_slot_clock_config" VALUE="true"/>
         <PARAMETER NAME="dsc_bypass_rd" VALUE="0000"/>
@@ -3553,10 +3849,10 @@
         <PARAMETER NAME="pf1_vendor_id_mqdma" VALUE="10EE"/>
         <PARAMETER NAME="pf2_vendor_id_mqdma" VALUE="10EE"/>
         <PARAMETER NAME="pf3_vendor_id_mqdma" VALUE="10EE"/>
-        <PARAMETER NAME="PF0_DEVICE_ID_mqdma" VALUE="9031"/>
+        <PARAMETER NAME="PF0_DEVICE_ID_mqdma" VALUE="9011"/>
         <PARAMETER NAME="PF1_DEVICE_ID_mqdma" VALUE="0007"/>
-        <PARAMETER NAME="PF2_DEVICE_ID_mqdma" VALUE="9031"/>
-        <PARAMETER NAME="PF3_DEVICE_ID_mqdma" VALUE="9031"/>
+        <PARAMETER NAME="PF2_DEVICE_ID_mqdma" VALUE="9011"/>
+        <PARAMETER NAME="PF3_DEVICE_ID_mqdma" VALUE="9011"/>
         <PARAMETER NAME="PF0_REVISION_ID_mqdma" VALUE="00"/>
         <PARAMETER NAME="PF1_REVISION_ID_mqdma" VALUE="00"/>
         <PARAMETER NAME="PF2_REVISION_ID_mqdma" VALUE="00"/>
@@ -3793,7 +4089,7 @@
             <CONNECTION INSTANCE="phy_bd_imp" PORT="pci_express_x1_rxn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT CLKFREQUENCY="125000000" DIR="O" NAME="axi_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
+        <PORT CLKFREQUENCY="62500000" DIR="O" NAME="axi_aclk" SIGIS="clk" SIGNAME="pcie_xdma_0_axi_aclk">
           <CONNECTIONS>
             <CONNECTION INSTANCE="bram_axi_bram_ctrl_0" PORT="s_axi_aclk"/>
             <CONNECTION INSTANCE="External_Ports" PORT="pcie_aclk"/>
@@ -4089,7 +4385,7 @@
           <PARAMETER NAME="HAS_BURST" VALUE="0"/>
           <PARAMETER NAME="DATA_WIDTH" VALUE="64"/>
           <PARAMETER NAME="PROTOCOL" VALUE="AXI4"/>
-          <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
           <PARAMETER NAME="ID_WIDTH" VALUE="2"/>
           <PARAMETER NAME="ADDR_WIDTH" VALUE="64"/>
           <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -4106,13 +4402,13 @@
           <PARAMETER NAME="HAS_WSTRB" VALUE="1"/>
           <PARAMETER NAME="HAS_BRESP" VALUE="1"/>
           <PARAMETER NAME="HAS_RRESP" VALUE="1"/>
-          <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="4"/>
-          <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="4"/>
+          <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="2"/>
+          <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="2"/>
           <PARAMETER NAME="MAX_BURST_LENGTH" VALUE="256"/>
           <PARAMETER NAME="PHASE" VALUE="0.000"/>
           <PARAMETER NAME="CLK_DOMAIN" VALUE="phy_bd_xdma_0_0_axi_aclk"/>
-          <PARAMETER NAME="NUM_READ_THREADS" VALUE="2"/>
-          <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="2"/>
+          <PARAMETER NAME="NUM_READ_THREADS" VALUE="1"/>
+          <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="1"/>
           <PARAMETER NAME="RUSER_BITS_PER_BYTE" VALUE="0"/>
           <PARAMETER NAME="WUSER_BITS_PER_BYTE" VALUE="0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
@@ -4160,7 +4456,7 @@
           <PARAMETER NAME="SUPPORTS_NARROW_BURST" VALUE="0"/>
           <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
           <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
-          <PARAMETER NAME="FREQ_HZ" VALUE="125000000"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="62500000"/>
           <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
           <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
           <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
@@ -5899,6 +6195,8 @@
         <PORT DIR="O" NAME="Res" SIGIS="undef" SIGNAME="qsfp0_util_reduced_logic_0_Res">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_aresetn"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="aresetn"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="aresetn"/>
             <CONNECTION INSTANCE="qsfp0_util_vector_logic_1" PORT="Op1"/>
           </CONNECTIONS>
         </PORT>
@@ -5993,7 +6291,7 @@
         <PARAMETER NAME="C_LANE2_GT_LOC" VALUE="NA"/>
         <PARAMETER NAME="C_LANE3_GT_LOC" VALUE="NA"/>
         <PARAMETER NAME="C_LANE4_GT_LOC" VALUE="NA"/>
-        <PARAMETER NAME="C_INS_LOSS_NYQ" VALUE="10"/>
+        <PARAMETER NAME="C_INS_LOSS_NYQ" VALUE="30"/>
         <PARAMETER NAME="C_RX_EQ_MODE" VALUE="AUTO"/>
         <PARAMETER NAME="C_ENABLE_PIPELINE_REG" VALUE="0"/>
         <PARAMETER NAME="C_ADD_GT_CNTRL_STS_PORTS" VALUE="0"/>
@@ -6118,6 +6416,8 @@
         <PORT CLKFREQUENCY="156250000" DIR="O" NAME="tx_clk_out_0" SIGIS="clk" SIGNAME="qsfp0_xxv_ethernet_1_tx_clk_out_0">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_aclk"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="aclk"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="aclk"/>
             <CONNECTION INSTANCE="qsfp0_proc_sys_reset_0" PORT="slowest_sync_clk"/>
             <CONNECTION INSTANCE="qsfp0_xxv_ethernet_1" PORT="rx_core_clk_0"/>
             <CONNECTION INSTANCE="qsfp0_ethernet_link_up" PORT="clk"/>
@@ -6142,29 +6442,29 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="user_rx_reset_0" SIGIS="rst"/>
-        <PORT DIR="O" NAME="rx_axis_tvalid_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tvalid_0">
+        <PORT DIR="O" NAME="rx_axis_tvalid_0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tvalid"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="s_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="63" NAME="rx_axis_tdata_0" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tdata_0">
+        <PORT DIR="O" LEFT="63" NAME="rx_axis_tdata_0" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tdata"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="s_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="rx_axis_tlast_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tlast_0">
+        <PORT DIR="O" NAME="rx_axis_tlast_0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tlast"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="s_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="7" NAME="rx_axis_tkeep_0" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tkeep_0">
+        <PORT DIR="O" LEFT="7" NAME="rx_axis_tkeep_0" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tkeep">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tkeep"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="s_axis_tkeep"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="rx_axis_tuser_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_rx_axis_tuser_0">
+        <PORT DIR="O" NAME="rx_axis_tuser_0" SIGIS="undef" SIGNAME="axis_register_slice_0_s_axis_tuser">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_rx_tuser"/>
+            <CONNECTION INSTANCE="axis_register_slice_0" PORT="s_axis_tuser"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="ctl_rx_enable_0" SIGIS="undef" SIGNAME="qsfp0_one_dout">
@@ -6289,34 +6589,34 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="user_tx_reset_0" SIGIS="rst"/>
-        <PORT DIR="O" NAME="tx_axis_tready_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tready_0">
+        <PORT DIR="O" NAME="tx_axis_tready_0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tready"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="tx_axis_tvalid_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tvalid_0">
+        <PORT DIR="I" NAME="tx_axis_tvalid_0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tvalid"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="63" NAME="tx_axis_tdata_0" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tdata_0">
+        <PORT DIR="I" LEFT="63" NAME="tx_axis_tdata_0" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tdata"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="tx_axis_tlast_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tlast_0">
+        <PORT DIR="I" NAME="tx_axis_tlast_0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tlast">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tlast"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tlast"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="tx_axis_tkeep_0" RIGHT="0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tkeep_0">
+        <PORT DIR="I" LEFT="7" NAME="tx_axis_tkeep_0" RIGHT="0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tkeep">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tkeep"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tkeep"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="tx_axis_tuser_0" SIGIS="undef" SIGNAME="qsfp0_xxv_ethernet_1_tx_axis_tuser_0">
+        <PORT DIR="I" NAME="tx_axis_tuser_0" SIGIS="undef" SIGNAME="axis_register_slice_1_m_axis_tuser">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="phy_bd_imp" PORT="axis_tx_tuser"/>
+            <CONNECTION INSTANCE="axis_register_slice_1" PORT="m_axis_tuser"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="tx_unfout_0" SIGIS="undef"/>
@@ -6437,7 +6737,7 @@
             <PORTMAP LOGICAL="CLK_P" PHYSICAL="gt_refclk_p"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="qsfp0_xxv_ethernet_1_axis_rx_0" NAME="axis_rx_0" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="qsfp0_xxv_ethernet_1_axis_rx_0" NAME="axis_rx_0" TYPE="MASTER" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -6459,7 +6759,7 @@
             <PORTMAP LOGICAL="TVALID" PHYSICAL="rx_axis_tvalid_0"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="External_Interface_axis_tx" NAME="axis_tx_0" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="axis_register_slice_1_M_AXIS" NAME="axis_tx_0" TYPE="SLAVE" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="8"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>

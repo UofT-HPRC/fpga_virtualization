@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x583144AABC21A8FC",
+      "boundary_crc": "0x501EE9EE319DE8F9",
       "device": "xcu200-fsgd2104-2-e",
       "name": "phy_bd",
       "synth_flow_mode": "Hierarchical",
@@ -38,7 +38,9 @@
         "zero": "",
         "util_vector_logic_1": ""
       },
-      "axi_register_slice_0": ""
+      "axi_register_slice_0": "",
+      "axis_register_slice_0": "",
+      "axis_register_slice_1": ""
     },
     "interface_ports": {
       "pci_express_x1": {
@@ -119,7 +121,7 @@
             "value": "32"
           },
           "FREQ_HZ": {
-            "value": "125000000"
+            "value": "62500000"
           },
           "HAS_BRESP": {
             "value": "1",
@@ -222,11 +224,11 @@
           },
           "HAS_TKEEP": {
             "value": "1",
-            "value_src": "auto_prop"
+            "value_src": "default_prop"
           },
           "HAS_TLAST": {
             "value": "1",
-            "value_src": "auto_prop"
+            "value_src": "default_prop"
           },
           "HAS_TREADY": {
             "value": "0",
@@ -234,7 +236,7 @@
           },
           "HAS_TSTRB": {
             "value": "0",
-            "value_src": "const_prop"
+            "value_src": "default"
           },
           "INSERT_VIP": {
             "value": "0",
@@ -249,19 +251,19 @@
           },
           "TDATA_NUM_BYTES": {
             "value": "8",
-            "value_src": "auto_prop"
+            "value_src": "default_prop"
           },
           "TDEST_WIDTH": {
             "value": "0",
-            "value_src": "const_prop"
+            "value_src": "default"
           },
           "TID_WIDTH": {
             "value": "0",
-            "value_src": "const_prop"
+            "value_src": "default"
           },
           "TUSER_WIDTH": {
             "value": "1",
-            "value_src": "auto_prop"
+            "value_src": "default_prop"
           }
         }
       },
@@ -332,7 +334,7 @@
             "value_src": "default_prop"
           },
           "FREQ_HZ": {
-            "value": "125000000",
+            "value": "62500000",
             "value_src": "user_prop"
           },
           "INSERT_VIP": {
@@ -406,16 +408,16 @@
           }
         },
         "interface_nets": {
-          "axi_bram_ctrl_0_BRAM_PORTA": {
-            "interface_ports": [
-              "axi_bram_ctrl_0/BRAM_PORTA",
-              "axi_bram_ctrl_0_bram/BRAM_PORTA"
-            ]
-          },
           "pcie_M_AXI": {
             "interface_ports": [
               "S_AXI",
               "axi_bram_ctrl_0/S_AXI"
+            ]
+          },
+          "axi_bram_ctrl_0_BRAM_PORTA": {
+            "interface_ports": [
+              "axi_bram_ctrl_0/BRAM_PORTA",
+              "axi_bram_ctrl_0_bram/BRAM_PORTA"
             ]
           }
         },
@@ -502,13 +504,13 @@
                 "value": "pci_express_x1"
               },
               "PF0_DEVICE_ID_mqdma": {
-                "value": "9031"
+                "value": "9011"
               },
               "PF2_DEVICE_ID_mqdma": {
-                "value": "9031"
+                "value": "9011"
               },
               "PF3_DEVICE_ID_mqdma": {
-                "value": "9031"
+                "value": "9011"
               },
               "SYS_RST_N_BOARD_INTERFACE": {
                 "value": "pcie_perstn"
@@ -529,13 +531,16 @@
                 "value": "false"
               },
               "axisten_freq": {
-                "value": "125"
+                "value": "62.5"
               },
               "cfg_ext_if": {
                 "value": "false"
               },
               "cfg_mgmt_if": {
                 "value": "false"
+              },
+              "dsc_bypass_rd": {
+                "value": "0000"
               },
               "enable_pcie_debug": {
                 "value": "False"
@@ -549,8 +554,11 @@
               "mode_selection": {
                 "value": "Advanced"
               },
+              "pcie_extended_tag": {
+                "value": "false"
+              },
               "pf0_device_id": {
-                "value": "9031"
+                "value": "9011"
               },
               "pf0_interrupt_pin": {
                 "value": "INTA"
@@ -564,9 +572,6 @@
               "pf0_rbar_cap_bar0": {
                 "value": "0x00000000fff0"
               },
-              "pf1_msix_cap_table_size": {
-                "value": "01F"
-              },
               "pf1_rbar_cap_bar0": {
                 "value": "0x00000000fff0"
               },
@@ -577,10 +582,7 @@
                 "value": "0x00000000fff0"
               },
               "pl_link_cap_max_link_speed": {
-                "value": "8.0_GT/s"
-              },
-              "plltype": {
-                "value": "QPLL1"
+                "value": "2.5_GT/s"
               },
               "xdma_axi_intf_mm": {
                 "value": "AXI_Memory_Mapped"
@@ -592,16 +594,16 @@
                 "value": "1"
               },
               "xdma_rnum_chnl": {
-                "value": "2"
+                "value": "1"
               },
               "xdma_rnum_rids": {
-                "value": "4"
-              },
-              "xdma_wnum_chnl": {
                 "value": "2"
               },
+              "xdma_wnum_chnl": {
+                "value": "1"
+              },
               "xdma_wnum_rids": {
-                "value": "4"
+                "value": "2"
               }
             }
           },
@@ -620,16 +622,10 @@
           }
         },
         "interface_nets": {
-          "xdma_0_pcie_mgt": {
+          "pcie_refclk_1": {
             "interface_ports": [
-              "pci_express_x1",
-              "xdma_0/pcie_mgt"
-            ]
-          },
-          "xdma_0_M_AXI": {
-            "interface_ports": [
-              "M_AXI",
-              "xdma_0/M_AXI"
+              "pcie_refclk",
+              "util_ds_buf_0/CLK_IN_D"
             ]
           },
           "xdma_0_M_AXI_LITE": {
@@ -638,10 +634,16 @@
               "xdma_0/M_AXI_LITE"
             ]
           },
-          "pcie_refclk_1": {
+          "xdma_0_M_AXI": {
             "interface_ports": [
-              "pcie_refclk",
-              "util_ds_buf_0/CLK_IN_D"
+              "M_AXI",
+              "xdma_0/M_AXI"
+            ]
+          },
+          "xdma_0_pcie_mgt": {
+            "interface_ports": [
+              "pci_express_x1",
+              "xdma_0/pcie_mgt"
             ]
           }
         },
@@ -819,6 +821,9 @@
               "MMCM_CLKOUT0_DIVIDE_F": {
                 "value": "16.000"
               },
+              "MMCM_DIVCLK_DIVIDE": {
+                "value": "1"
+              },
               "PRIM_SOURCE": {
                 "value": "Differential_clock_capable_pin"
               },
@@ -983,16 +988,10 @@
           }
         },
         "interface_nets": {
-          "axis_tx_1": {
+          "Conn4": {
             "interface_ports": [
-              "axis_tx",
-              "xxv_ethernet_1/axis_tx_0"
-            ]
-          },
-          "xxv_ethernet_1_axis_rx_0": {
-            "interface_ports": [
-              "axis_rx",
-              "xxv_ethernet_1/axis_rx_0"
+              "qsfp0_156mhz_0",
+              "xxv_ethernet_1/gt_ref_clk"
             ]
           },
           "refclk_300M_1": {
@@ -1001,10 +1000,16 @@
               "clk_wiz_0/CLK_IN1_D"
             ]
           },
-          "Conn4": {
+          "xxv_ethernet_1_axis_rx_0": {
             "interface_ports": [
-              "qsfp0_156mhz_0",
-              "xxv_ethernet_1/gt_ref_clk"
+              "axis_rx",
+              "xxv_ethernet_1/axis_rx_0"
+            ]
+          },
+          "axis_tx_1": {
+            "interface_ports": [
+              "axis_tx",
+              "xxv_ethernet_1/axis_tx_0"
             ]
           },
           "Conn3": {
@@ -1147,43 +1152,74 @@
         "xci_name": "phy_bd_axi_register_slice_0_0",
         "parameters": {
           "REG_AR": {
-            "value": "15"
+            "value": "7"
           },
           "REG_AW": {
-            "value": "15"
+            "value": "7"
           },
           "REG_B": {
-            "value": "15"
+            "value": "7"
           },
           "REG_R": {
-            "value": "15"
+            "value": "7"
           },
           "REG_W": {
-            "value": "15"
+            "value": "7"
           },
           "USE_AUTOPIPELINING": {
             "value": "1"
           }
         }
+      },
+      "axis_register_slice_0": {
+        "vlnv": "xilinx.com:ip:axis_register_slice:1.1",
+        "xci_name": "phy_bd_axis_register_slice_0_0"
+      },
+      "axis_register_slice_1": {
+        "vlnv": "xilinx.com:ip:axis_register_slice:1.1",
+        "xci_name": "phy_bd_axis_register_slice_0_1",
+        "parameters": {
+          "REG_CONFIG": {
+            "value": "12"
+          }
+        }
       }
     },
     "interface_nets": {
-      "refclk_300M_1": {
-        "interface_ports": [
-          "refclk_300mhz",
-          "qsfp0/refclk_300mhz"
-        ]
-      },
-      "qsfp0_qsfp0_1x_0": {
-        "interface_ports": [
-          "qsfp0_1x",
-          "qsfp0/qsfp0_1x_0"
-        ]
-      },
       "axi_register_slice_0_M_AXI": {
         "interface_ports": [
           "M_AXI_LITE",
           "axi_register_slice_0/M_AXI"
+        ]
+      },
+      "qsfp0_axis_rx": {
+        "interface_ports": [
+          "qsfp0/axis_rx",
+          "axis_register_slice_0/S_AXIS"
+        ]
+      },
+      "axis_register_slice_0_M_AXIS": {
+        "interface_ports": [
+          "axis_rx",
+          "axis_register_slice_0/M_AXIS"
+        ]
+      },
+      "axis_register_slice_1_M_AXIS": {
+        "interface_ports": [
+          "axis_register_slice_1/M_AXIS",
+          "qsfp0/axis_tx"
+        ]
+      },
+      "axis_tx_1": {
+        "interface_ports": [
+          "axis_tx",
+          "axis_register_slice_1/S_AXIS"
+        ]
+      },
+      "refclk_300M_1": {
+        "interface_ports": [
+          "refclk_300mhz",
+          "qsfp0/refclk_300mhz"
         ]
       },
       "pcie_M_AXI": {
@@ -1192,22 +1228,22 @@
           "pcie/M_AXI"
         ]
       },
-      "qsfp0_axis_rx": {
+      "qsfp0_qsfp0_1x_0": {
         "interface_ports": [
-          "axis_rx",
-          "qsfp0/axis_rx"
-        ]
-      },
-      "axis_tx_1": {
-        "interface_ports": [
-          "axis_tx",
-          "qsfp0/axis_tx"
+          "qsfp0_1x",
+          "qsfp0/qsfp0_1x_0"
         ]
       },
       "pcie_refclk_1": {
         "interface_ports": [
           "pcie_refclk",
           "pcie/pcie_refclk"
+        ]
+      },
+      "pcie_M_AXI_LITE": {
+        "interface_ports": [
+          "pcie/M_AXI_LITE",
+          "axi_register_slice_0/S_AXI"
         ]
       },
       "xdma_0_pcie_mgt": {
@@ -1220,12 +1256,6 @@
         "interface_ports": [
           "qsfp0_156mhz",
           "qsfp0/qsfp0_156mhz_0"
-        ]
-      },
-      "pcie_M_AXI_LITE": {
-        "interface_ports": [
-          "pcie/M_AXI_LITE",
-          "axi_register_slice_0/S_AXI"
         ]
       }
     },
@@ -1256,13 +1286,17 @@
       "qsfp0_aclk": {
         "ports": [
           "qsfp0/aclk",
-          "qsfp0_aclk"
+          "qsfp0_aclk",
+          "axis_register_slice_0/aclk",
+          "axis_register_slice_1/aclk"
         ]
       },
       "qsfp0_aresetn_out": {
         "ports": [
           "qsfp0/aresetn_out",
-          "qsfp0_aresetn"
+          "qsfp0_aresetn",
+          "axis_register_slice_0/aresetn",
+          "axis_register_slice_1/aresetn"
         ]
       }
     },

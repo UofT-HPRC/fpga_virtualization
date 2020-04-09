@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1.3 (lin64) Build 2644227 Wed Sep  4 09:44:18 MDT 2019
-//Date        : Wed Mar 25 12:35:18 2020
-//Host        : agent-2 running 64-bit Ubuntu 16.04.6 LTS
+//Date        : Wed Apr  8 08:52:30 2020
+//Host        : agent-3 running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target phy_bd_wrapper.bd
 //Design      : phy_bd_wrapper
 //Purpose     : IP block netlist
@@ -81,13 +81,13 @@ module phy_bd_wrapper
   output [63:0]axis_rx_tdata;
   output [7:0]axis_rx_tkeep;
   output axis_rx_tlast;
-  output axis_rx_tuser;
+  output [0:0]axis_rx_tuser;
   output axis_rx_tvalid;
   input [63:0]axis_tx_tdata;
   input [7:0]axis_tx_tkeep;
   input axis_tx_tlast;
   output axis_tx_tready;
-  input axis_tx_tuser;
+  input [0:0]axis_tx_tuser;
   input axis_tx_tvalid;
   input pci_express_x1_rxn;
   input pci_express_x1_rxp;
@@ -131,13 +131,13 @@ module phy_bd_wrapper
   wire [63:0]axis_rx_tdata;
   wire [7:0]axis_rx_tkeep;
   wire axis_rx_tlast;
-  wire axis_rx_tuser;
+  wire [0:0]axis_rx_tuser;
   wire axis_rx_tvalid;
   wire [63:0]axis_tx_tdata;
   wire [7:0]axis_tx_tkeep;
   wire axis_tx_tlast;
   wire axis_tx_tready;
-  wire axis_tx_tuser;
+  wire [0:0]axis_tx_tuser;
   wire axis_tx_tvalid;
   wire pci_express_x1_rxn;
   wire pci_express_x1_rxp;

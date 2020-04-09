@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="37">
   <CompositeFile CompositeFileTopName="phy_bd" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1585139720"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1585139720"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1585139720"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1585139720"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1586350365"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1586350365"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1586350365"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1586350365"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/phy_bd_axi_bram_ctrl_0_0/phy_bd_axi_bram_ctrl_0_0.xci" Type="IP">
         <Instance HierarchyPath="bram/axi_bram_ctrl_0"/>
@@ -204,6 +204,22 @@
       </File>
       <File Name="ip/phy_bd_util_vector_logic_0_1/phy_bd_util_vector_logic_0_1.xci" Type="IP">
         <Instance HierarchyPath="qsfp0/util_vector_logic_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/phy_bd_axis_register_slice_0_0/phy_bd_axis_register_slice_0_0.xci" Type="IP">
+        <Instance HierarchyPath="axis_register_slice_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/phy_bd_axis_register_slice_0_1/phy_bd_axis_register_slice_0_1.xci" Type="IP">
+        <Instance HierarchyPath="axis_register_slice_1"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

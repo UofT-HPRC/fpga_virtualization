@@ -33,7 +33,7 @@ module axil_reg_slice
     input wire                              axi_lite_s_awvalid,
     output wire                             axi_lite_s_awready,
     //Write Data Channel
-    input wire [(32))-1:0]                  axi_lite_s_wdata,
+    input wire [(32)-1:0]                   axi_lite_s_wdata,
     input wire [(32/8)-1:0]                 axi_lite_s_wstrb,
     input wire                              axi_lite_s_wvalid,
     output wire                             axi_lite_s_wready,
@@ -57,7 +57,7 @@ module axil_reg_slice
     output wire                             axi_lite_m_awvalid,
     input wire                              axi_lite_m_awready,
     //Write Data Channel
-    output wire [(32))-1:0]                 axi_lite_m_wdata,
+    output wire [(32)-1:0]                  axi_lite_m_wdata,
     output wire [(32/8)-1:0]                axi_lite_m_wstrb,
     output wire                             axi_lite_m_wvalid,
     input wire                              axi_lite_m_wready,
@@ -112,7 +112,7 @@ module axil_reg_slice
     #(
         .DATA_WIDTH( 32 + (32/8) )
     )
-    aw_reg_slice
+    w_reg_slice
     (
         .in_data    ( { axi_lite_s_wdata, 
                         axi_lite_s_wstrb } ),
@@ -138,7 +138,7 @@ module axil_reg_slice
     #(
         .DATA_WIDTH(2)
     )
-    aw_reg_slice
+    b_reg_slice
     (
         .in_data    (axi_lite_m_bresp),
         .in_valid   (axi_lite_m_bvalid),
@@ -162,7 +162,7 @@ module axil_reg_slice
     #(
         .DATA_WIDTH(AXI_ADDR_WIDTH)
     )
-    aw_reg_slice
+    ar_reg_slice
     (
         .in_data    (axi_lite_s_araddr),
         .in_valid   (axi_lite_s_arvalid),
@@ -186,7 +186,7 @@ module axil_reg_slice
     #(
         .DATA_WIDTH( 32 + 2 )
     )
-    aw_reg_slice
+    r_reg_slice
     (
         .in_data    ( { axi_lite_m_rresp,
                         axi_lite_m_rdata  } ),

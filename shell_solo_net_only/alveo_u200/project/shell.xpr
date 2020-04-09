@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="40" Path="/home/rozhkoda/Desktop/repo/fpga_virtualization/shell_solo_net_only/alveo_u200/project/shell.xpr">
+<Project Version="7" Minor="40" Path="/home/rozhkoda/Repos/fpga_virtualization/shell_solo_net_only/alveo_u200/project/shell.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a93056623dad41819210f3f7c480c71b"/>
@@ -66,8 +66,23 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_xdma_0_0/phy_bd_xdma_0_0.xci">
+          <Proxy FileSetName="phy_bd_xdma_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_util_reduced_logic_0_0/phy_bd_util_reduced_logic_0_0.xci">
+          <Proxy FileSetName="phy_bd_util_reduced_logic_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_clk_wiz_0_0/phy_bd_clk_wiz_0_0.xci">
+          <Proxy FileSetName="phy_bd_clk_wiz_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_ethernet_link_up_0/phy_bd_ethernet_link_up_0.xci">
+          <Proxy FileSetName="phy_bd_ethernet_link_up_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axi_register_slice_0_0/phy_bd_axi_register_slice_0_0.xci">
           <Proxy FileSetName="phy_bd_axi_register_slice_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_xxv_ethernet_1_0/phy_bd_xxv_ethernet_1_0.xci">
+          <Proxy FileSetName="phy_bd_xxv_ethernet_1_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_util_vector_logic_0_0/phy_bd_util_vector_logic_0_0.xci">
           <Proxy FileSetName="phy_bd_util_vector_logic_0_0"/>
@@ -78,32 +93,26 @@
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_proc_sys_reset_0_0/phy_bd_proc_sys_reset_0_0.xci">
           <Proxy FileSetName="phy_bd_proc_sys_reset_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_xxv_ethernet_1_0/phy_bd_xxv_ethernet_1_0.xci">
-          <Proxy FileSetName="phy_bd_xxv_ethernet_1_0"/>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axis_register_slice_0_1/phy_bd_axis_register_slice_0_1.xci">
+          <Proxy FileSetName="phy_bd_axis_register_slice_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axis_register_slice_0_0/phy_bd_axis_register_slice_0_0.xci">
+          <Proxy FileSetName="phy_bd_axis_register_slice_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_util_vector_logic_0_1/phy_bd_util_vector_logic_0_1.xci">
+          <Proxy FileSetName="phy_bd_util_vector_logic_0_1"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axi_bram_ctrl_0_0/phy_bd_axi_bram_ctrl_0_0.xci">
           <Proxy FileSetName="phy_bd_axi_bram_ctrl_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axi_bram_ctrl_0_bram_0/phy_bd_axi_bram_ctrl_0_bram_0.xci">
-          <Proxy FileSetName="phy_bd_axi_bram_ctrl_0_bram_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_util_reduced_logic_0_0/phy_bd_util_reduced_logic_0_0.xci">
-          <Proxy FileSetName="phy_bd_util_reduced_logic_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_xdma_0_0/phy_bd_xdma_0_0.xci">
-          <Proxy FileSetName="phy_bd_xdma_0_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_pcie_link_up_vio_0/phy_bd_pcie_link_up_vio_0.xci">
           <Proxy FileSetName="phy_bd_pcie_link_up_vio_0"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_axi_bram_ctrl_0_bram_0/phy_bd_axi_bram_ctrl_0_bram_0.xci">
+          <Proxy FileSetName="phy_bd_axi_bram_ctrl_0_bram_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_util_ds_buf_0_0/phy_bd_util_ds_buf_0_0.xci">
           <Proxy FileSetName="phy_bd_util_ds_buf_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_clk_wiz_0_0/phy_bd_clk_wiz_0_0.xci">
-          <Proxy FileSetName="phy_bd_clk_wiz_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="phy_bd.bd" FileRelPathName="ip/phy_bd_ethernet_link_up_0/phy_bd_ethernet_link_up_0.xci">
-          <Proxy FileSetName="phy_bd_ethernet_link_up_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PPRDIR/../../../net_isolation/net_iso_reg_file.v">
@@ -184,6 +193,13 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../../net_isolation/axi_stream_slave_verifier.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../misc_rtl/axil_reg_slice.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -406,6 +422,24 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
+    <FileSet Name="phy_bd_util_vector_logic_0_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/phy_bd_util_vector_logic_0_1">
+      <Config>
+        <Option Name="TopModule" Val="phy_bd_util_vector_logic_0_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="phy_bd_axis_register_slice_0_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/phy_bd_axis_register_slice_0_1">
+      <Config>
+        <Option Name="TopModule" Val="phy_bd_axis_register_slice_0_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="phy_bd_axis_register_slice_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/phy_bd_axis_register_slice_0_0">
+      <Config>
+        <Option Name="TopModule" Val="phy_bd_axis_register_slice_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -434,12 +468,8 @@
   <Runs Version="1" Minor="10">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xcu200-fsgd2104-2-e" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design">
-          <Option Id="ReTiming">1</Option>
-        </Step>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
+        <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2019"/>
@@ -582,33 +612,50 @@
     </Run>
     <Run Id="one_clock_decouple_synth_1" Type="Ft3:Synth" SrcSet="one_clock_decouple" Part="xcu200-fsgd2104-2-e" ConstrsSet="one_clock_decouple" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/one_clock_decouple_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2019"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="constrs_1" Description="Combines retiming in phys_opt_design with extra placement optimization and higher router delay cost." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true" GenFullBitstream="true">
+    <Run Id="phy_bd_util_vector_logic_0_1_synth_1" Type="Ft3:Synth" SrcSet="phy_bd_util_vector_logic_0_1" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_util_vector_logic_0_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/phy_bd_util_vector_logic_0_1_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Performance_Retiming" Flow="Vivado Implementation 2019">
-          <Desc>Combines retiming in phys_opt_design with extra placement optimization and higher router delay cost.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="phy_bd_axis_register_slice_0_1_synth_1" Type="Ft3:Synth" SrcSet="phy_bd_axis_register_slice_0_1" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_axis_register_slice_0_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/phy_bd_axis_register_slice_0_1_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="phy_bd_axis_register_slice_0_0_synth_1" Type="Ft3:Synth" SrcSet="phy_bd_axis_register_slice_0_0" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_axis_register_slice_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/phy_bd_axis_register_slice_0_0_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true" GenFullBitstream="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
-        <Step Id="place_design">
-          <Option Id="Directive">7</Option>
-        </Step>
+        <Step Id="place_design"/>
         <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design" EnableStepBool="1">
-          <Option Id="Directive">6</Option>
-        </Step>
-        <Step Id="route_design">
-          <Option Id="Directive">0</Option>
-        </Step>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
@@ -858,9 +905,55 @@
     </Run>
     <Run Id="one_clock_decouple_impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="one_clock_decouple" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="one_clock_decouple_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="phy_bd_util_vector_logic_0_1_impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_util_vector_logic_0_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="phy_bd_util_vector_logic_0_1_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="phy_bd_axis_register_slice_0_1_impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_axis_register_slice_0_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="phy_bd_axis_register_slice_0_1_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2019"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="phy_bd_axis_register_slice_0_0_impl_1" Type="Ft2:EntireDesign" Part="xcu200-fsgd2104-2-e" ConstrsSet="phy_bd_axis_register_slice_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="phy_bd_axis_register_slice_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

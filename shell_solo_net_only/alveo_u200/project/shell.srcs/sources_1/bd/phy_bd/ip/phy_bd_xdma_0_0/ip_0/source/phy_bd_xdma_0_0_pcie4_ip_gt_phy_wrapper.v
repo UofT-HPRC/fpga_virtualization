@@ -649,7 +649,7 @@ phy_clk_i
 phy_bd_xdma_0_0_pcie4_ip_gt_phy_rst #
 (
     .PHY_LANE                           (PHY_LANE),
-    .PHY_MAX_SPEED                      (PHY_MAX_SPEED)            
+    .PHY_MAX_SPEED                      (2)            
 )
 phy_rst_i
 (
