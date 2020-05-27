@@ -37,9 +37,10 @@ Parameters:
 AXI-Lite Control Interface Register Space
    Based on currently implemented AXI lite crossbar:
        0x0000000000000000 - Base address of the application region's axi lite space
-       0x0000000000100000 - Base address of the network isolation/decoupler core
-       0x0000000000200000 - Base address of the control isolation/decoupler core
-       0x0000000000300000 - Base address of the clocking and reset controller
+       0x0000000000100000 - Base address of the network 0 isolation/decoupler core
+       0x0000000000200000 - Base address of the network 1 isolation/decoupler core (TODO)
+       0x0000000000300000 - Base address of the control isolation/decoupler core
+       0x0000000000400000 - Base address of the clocking and reset controller
 
 Ports:
    axis_tx_s_* - the input axi stream for the tx direction
@@ -108,38 +109,72 @@ module interface_shell
 )
 (
     //Egress Input AXI stream (application region sends packets to this interface)
-    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_tx_s_tdata,
-    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_tx_s_tid,
-    input wire [NET_AXIS_DEST_WIDTH-1:0]        axis_tx_s_tdest,                                          
-    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_tx_s_tkeep,
-    input wire                                  axis_tx_s_tlast,
-    input wire                                  axis_tx_s_tvalid,
-    output wire                                 axis_tx_s_tready,
+    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_tx_0_s_tdata,
+    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_tx_0_s_tid,
+    input wire [NET_AXIS_DEST_WIDTH-1:0]        axis_tx_0_s_tdest,                                          
+    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_tx_0_s_tkeep,
+    input wire                                  axis_tx_0_s_tlast,
+    input wire                                  axis_tx_0_s_tvalid,
+    output wire                                 axis_tx_0_s_tready,
 
     //Egress Output AXI stream (TX packets go to Phy from this interface)
-    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_tx_m_tdata,
-    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_tx_m_tid,
-    output wire [NET_AXIS_DEST_WIDTH-1:0]       axis_tx_m_tdest,                                           
-    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_tx_m_tkeep,
-    output wire                                 axis_tx_m_tlast,
-    output wire                                 axis_tx_m_tvalid,
-    input wire                                  axis_tx_m_tready,
+    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_tx_0_m_tdata,
+    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_tx_0_m_tid,
+    output wire [NET_AXIS_DEST_WIDTH-1:0]       axis_tx_0_m_tdest,                                           
+    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_tx_0_m_tkeep,
+    output wire                                 axis_tx_0_m_tlast,
+    output wire                                 axis_tx_0_m_tvalid,
+    input wire                                  axis_tx_0_m_tready,
 
     //Ingress Input AXI stream (RX packets from Phy connect to this interafce)
-    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_rx_s_tdata,
-    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_rx_s_tdest,
-    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_rx_s_tkeep,
-    input wire                                  axis_rx_s_tlast,
-    input wire                                  axis_rx_s_tvalid,
-    output wire                                 axis_rx_s_tready,
+    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_rx_0_s_tdata,
+    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_rx_0_s_tdest,
+    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_rx_0_s_tkeep,
+    input wire                                  axis_rx_0_s_tlast,
+    input wire                                  axis_rx_0_s_tvalid,
+    output wire                                 axis_rx_0_s_tready,
 
     //Ingress Output AXI stream (application region receives packets from this interface)
-    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_rx_m_tdata,
-    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_rx_m_tdest,
-    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_rx_m_tkeep,
-    output wire                                 axis_rx_m_tlast,
-    output wire                                 axis_rx_m_tvalid,
-    input wire                                  axis_rx_m_tready,
+    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_rx_0_m_tdata,
+    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_rx_0_m_tdest,
+    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_rx_0_m_tkeep,
+    output wire                                 axis_rx_0_m_tlast,
+    output wire                                 axis_rx_0_m_tvalid,
+    input wire                                  axis_rx_0_m_tready,
+
+    //Egress Input AXI stream (application region sends packets to this interface)
+    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_tx_1_s_tdata,
+    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_tx_1_s_tid,
+    input wire [NET_AXIS_DEST_WIDTH-1:0]        axis_tx_1_s_tdest,                                          
+    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_tx_1_s_tkeep,
+    input wire                                  axis_tx_1_s_tlast,
+    input wire                                  axis_tx_1_s_tvalid,
+    output wire                                 axis_tx_1_s_tready,
+
+    //Egress Output AXI stream (TX packets go to Phy from this interface)
+    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_tx_1_m_tdata,
+    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_tx_1_m_tid,
+    output wire [NET_AXIS_DEST_WIDTH-1:0]       axis_tx_1_m_tdest,                                           
+    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_tx_1_m_tkeep,
+    output wire                                 axis_tx_1_m_tlast,
+    output wire                                 axis_tx_1_m_tvalid,
+    input wire                                  axis_tx_1_m_tready,
+
+    //Ingress Input AXI stream (RX packets from Phy connect to this interafce)
+    input wire [NET_AXIS_BUS_WIDTH-1:0]         axis_rx_1_s_tdata,
+    input wire [NET_AXIS_ID_WIDTH-1:0]          axis_rx_1_s_tdest,
+    input wire [(NET_AXIS_BUS_WIDTH/8)-1:0]     axis_rx_1_s_tkeep,
+    input wire                                  axis_rx_1_s_tlast,
+    input wire                                  axis_rx_1_s_tvalid,
+    output wire                                 axis_rx_1_s_tready,
+
+    //Ingress Output AXI stream (application region receives packets from this interface)
+    output wire [NET_AXIS_BUS_WIDTH-1:0]        axis_rx_1_m_tdata,
+    output wire [NET_AXIS_ID_WIDTH-1:0]         axis_rx_1_m_tdest,
+    output wire [(NET_AXIS_BUS_WIDTH/8)-1:0]    axis_rx_1_m_tkeep,
+    output wire                                 axis_rx_1_m_tlast,
+    output wire                                 axis_rx_1_m_tvalid,
+    input wire                                  axis_rx_1_m_tready,
 
     //Network Clocking
     input wire  axis_aclk,
@@ -212,31 +247,31 @@ module interface_shell
 
 
     //--------------------------------------------------------//
-    //   Network connection                                   //
+    //   Network connection 0                                 //
     //--------------------------------------------------------//
 
     //Control interface for network isolation cores (sync to net clock)
     //Write Address Channel  
-    wire [31:0]     net_iso_ctrl_awaddr;
-    wire            net_iso_ctrl_awvalid;
-    wire            net_iso_ctrl_awready;
+    wire [31:0]     net_iso_ctrl_0_awaddr;
+    wire            net_iso_ctrl_0_awvalid;
+    wire            net_iso_ctrl_0_awready;
     //Write Data Channel
-    wire  [31:0]    net_iso_ctrl_wdata;
-    wire            net_iso_ctrl_wvalid;
-    wire            net_iso_ctrl_wready;
+    wire  [31:0]    net_iso_ctrl_0_wdata;
+    wire            net_iso_ctrl_0_wvalid;
+    wire            net_iso_ctrl_0_wready;
     //Write Response Channel
-    wire [1:0]      net_iso_ctrl_bresp;
-    wire            net_iso_ctrl_bvalid;
-    wire            net_iso_ctrl_bready;
+    wire [1:0]      net_iso_ctrl_0_bresp;
+    wire            net_iso_ctrl_0_bvalid;
+    wire            net_iso_ctrl_0_bready;
     //Read Address Channel 
-    wire  [31:0]    net_iso_ctrl_araddr;
-    wire            net_iso_ctrl_arvalid;
-    wire            net_iso_ctrl_arready;
+    wire  [31:0]    net_iso_ctrl_0_araddr;
+    wire            net_iso_ctrl_0_arvalid;
+    wire            net_iso_ctrl_0_arready;
     //Read Data Response Channel
-    wire [31:0]     net_iso_ctrl_rdata;
-    wire [1:0]      net_iso_ctrl_rresp;
-    wire            net_iso_ctrl_rvalid;
-    wire            net_iso_ctrl_rready;
+    wire [31:0]     net_iso_ctrl_0_rdata;
+    wire [1:0]      net_iso_ctrl_0_rresp;
+    wire            net_iso_ctrl_0_rvalid;
+    wire            net_iso_ctrl_0_rready;
 
     //The network isolation wrapper
     net_iso_top
@@ -253,59 +288,59 @@ module interface_shell
         .TOKEN_COUNT_INT_WIDTH              (NET_TOKEN_COUNT_INT_WIDTH),
         .TOKEN_COUNT_FRAC_WIDTH             (NET_TOKEN_COUNT_FRAC_WIDTH)
     )
-    net_iso_inst
+    net_0_iso_inst
     (
         //Egress Input AXI stream (the master interface to isolate connects to this)
-        .axis_tx_s_tdata        (axis_tx_s_tdata),
-        .axis_tx_s_tid          (axis_tx_s_tid),
-        .axis_tx_s_tdest        (axis_tx_s_tdest),                                          
-        .axis_tx_s_tkeep        (axis_tx_s_tkeep),
-        .axis_tx_s_tlast        (axis_tx_s_tlast),
-        .axis_tx_s_tvalid       (axis_tx_s_tvalid),
-        .axis_tx_s_tready       (axis_tx_s_tready),
+        .axis_tx_s_tdata        (axis_tx_0_s_tdata),
+        .axis_tx_s_tid          (axis_tx_0_s_tid),
+        .axis_tx_s_tdest        (axis_tx_0_s_tdest),                                          
+        .axis_tx_s_tkeep        (axis_tx_0_s_tkeep),
+        .axis_tx_s_tlast        (axis_tx_0_s_tlast),
+        .axis_tx_s_tvalid       (axis_tx_0_s_tvalid),
+        .axis_tx_s_tready       (axis_tx_0_s_tready),
 
         //Egress Output AXI stream (connects to the slave expecting the isolated signal)
-        .axis_tx_m_tdata        (axis_tx_m_tdata),
-        .axis_tx_m_tid          (axis_tx_m_tid),
-        .axis_tx_m_tdest        (axis_tx_m_tdest),                                           
-        .axis_tx_m_tkeep        (axis_tx_m_tkeep),
-        .axis_tx_m_tlast        (axis_tx_m_tlast),
-        .axis_tx_m_tvalid       (axis_tx_m_tvalid),
-        .axis_tx_m_tready       (axis_tx_m_tready),
+        .axis_tx_m_tdata        (axis_tx_0_m_tdata),
+        .axis_tx_m_tid          (axis_tx_0_m_tid),
+        .axis_tx_m_tdest        (axis_tx_0_m_tdest),                                           
+        .axis_tx_m_tkeep        (axis_tx_0_m_tkeep),
+        .axis_tx_m_tlast        (axis_tx_0_m_tlast),
+        .axis_tx_m_tvalid       (axis_tx_0_m_tvalid),
+        .axis_tx_m_tready       (axis_tx_0_m_tready),
 
         //Ingress Input AXI stream (connects to the master expecting the isolated signal)
-        .axis_rx_s_tdata        (axis_rx_s_tdata),
-        .axis_rx_s_tdest        (axis_rx_s_tdest),
-        .axis_rx_s_tkeep        (axis_rx_s_tkeep),
-        .axis_rx_s_tlast        (axis_rx_s_tlast),
-        .axis_rx_s_tvalid       (axis_rx_s_tvalid),
-        .axis_rx_s_tready       (axis_rx_s_tready),
+        .axis_rx_s_tdata        (axis_rx_0_s_tdata),
+        .axis_rx_s_tdest        (axis_rx_0_s_tdest),
+        .axis_rx_s_tkeep        (axis_rx_0_s_tkeep),
+        .axis_rx_s_tlast        (axis_rx_0_s_tlast),
+        .axis_rx_s_tvalid       (axis_rx_0_s_tvalid),
+        .axis_rx_s_tready       (axis_rx_0_s_tready),
 
         //Ingress Output AXI stream (the slave interface to isolate connects to this)
-        .axis_rx_m_tdata        (axis_rx_m_tdata),
-        .axis_rx_m_tdest        (axis_rx_m_tdest),
-        .axis_rx_m_tkeep        (axis_rx_m_tkeep),
-        .axis_rx_m_tlast        (axis_rx_m_tlast),
-        .axis_rx_m_tvalid       (axis_rx_m_tvalid),
-        .axis_rx_m_tready       (axis_rx_m_tready),
+        .axis_rx_m_tdata        (axis_rx_0_m_tdata),
+        .axis_rx_m_tdest        (axis_rx_0_m_tdest),
+        .axis_rx_m_tkeep        (axis_rx_0_m_tkeep),
+        .axis_rx_m_tlast        (axis_rx_0_m_tlast),
+        .axis_rx_m_tvalid       (axis_rx_0_m_tvalid),
+        .axis_rx_m_tready       (axis_rx_0_m_tready),
         
         //The AXI-Lite Control Interface
-        .ctrl_awaddr            (net_iso_ctrl_awaddr),
-        .ctrl_awvalid           (net_iso_ctrl_awvalid),
-        .ctrl_awready           (net_iso_ctrl_awready),
-        .ctrl_wdata             (net_iso_ctrl_wdata),
-        .ctrl_wvalid            (net_iso_ctrl_wvalid),
-        .ctrl_wready            (net_iso_ctrl_wready),
-        .ctrl_bresp             (net_iso_ctrl_bresp),
-        .ctrl_bvalid            (net_iso_ctrl_bvalid),
-        .ctrl_bready            (net_iso_ctrl_bready),
-        .ctrl_araddr            (net_iso_ctrl_araddr),
-        .ctrl_arvalid           (net_iso_ctrl_arvalid),
-        .ctrl_arready           (net_iso_ctrl_arready),
-        .ctrl_rdata             (net_iso_ctrl_rdata),
-        .ctrl_rresp             (net_iso_ctrl_rresp),
-        .ctrl_rvalid            (net_iso_ctrl_rvalid),
-        .ctrl_rready            (net_iso_ctrl_rready),
+        .ctrl_awaddr            (net_iso_ctrl_0_awaddr),
+        .ctrl_awvalid           (net_iso_ctrl_0_awvalid),
+        .ctrl_awready           (net_iso_ctrl_0_awready),
+        .ctrl_wdata             (net_iso_ctrl_0_wdata),
+        .ctrl_wvalid            (net_iso_ctrl_0_wvalid),
+        .ctrl_wready            (net_iso_ctrl_0_wready),
+        .ctrl_bresp             (net_iso_ctrl_0_bresp),
+        .ctrl_bvalid            (net_iso_ctrl_0_bvalid),
+        .ctrl_bready            (net_iso_ctrl_0_bready),
+        .ctrl_araddr            (net_iso_ctrl_0_araddr),
+        .ctrl_arvalid           (net_iso_ctrl_0_arvalid),
+        .ctrl_arready           (net_iso_ctrl_0_arready),
+        .ctrl_rdata             (net_iso_ctrl_0_rdata),
+        .ctrl_rresp             (net_iso_ctrl_0_rresp),
+        .ctrl_rvalid            (net_iso_ctrl_0_rvalid),
+        .ctrl_rready            (net_iso_ctrl_0_rready),
 
         //Clocking
         .aclk                   (axis_aclk),
@@ -314,78 +349,257 @@ module interface_shell
 
     //Control interface for network isolation cores (sync to ctrl clock)
     //Write Address Channel  
-    wire [31:0]     net_iso_sync_ctrl_awaddr;
-    wire            net_iso_sync_ctrl_awvalid;
-    wire            net_iso_sync_ctrl_awready;
+    wire [31:0]     net_iso_sync_ctrl_0_awaddr;
+    wire            net_iso_sync_ctrl_0_awvalid;
+    wire            net_iso_sync_ctrl_0_awready;
     //Write Data Channel
-    wire  [31:0]    net_iso_sync_ctrl_wdata;
-    wire            net_iso_sync_ctrl_wvalid;
-    wire            net_iso_sync_ctrl_wready;
+    wire  [31:0]    net_iso_sync_ctrl_0_wdata;
+    wire            net_iso_sync_ctrl_0_wvalid;
+    wire            net_iso_sync_ctrl_0_wready;
     //Write Response Channel
-    wire [1:0]      net_iso_sync_ctrl_bresp;
-    wire            net_iso_sync_ctrl_bvalid;
-    wire            net_iso_sync_ctrl_bready;
+    wire [1:0]      net_iso_sync_ctrl_0_bresp;
+    wire            net_iso_sync_ctrl_0_bvalid;
+    wire            net_iso_sync_ctrl_0_bready;
     //Read Address Channel 
-    wire  [31:0]    net_iso_sync_ctrl_araddr;
-    wire            net_iso_sync_ctrl_arvalid;
-    wire            net_iso_sync_ctrl_arready;
+    wire  [31:0]    net_iso_sync_ctrl_0_araddr;
+    wire            net_iso_sync_ctrl_0_arvalid;
+    wire            net_iso_sync_ctrl_0_arready;
     //Read Data Response Channel
-    wire [31:0]     net_iso_sync_ctrl_rdata;
-    wire [1:0]      net_iso_sync_ctrl_rresp;
-    wire            net_iso_sync_ctrl_rvalid;
-    wire            net_iso_sync_ctrl_rready;
+    wire [31:0]     net_iso_sync_ctrl_0_rdata;
+    wire [1:0]      net_iso_sync_ctrl_0_rresp;
+    wire            net_iso_sync_ctrl_0_rvalid;
+    wire            net_iso_sync_ctrl_0_rready;
 
     //[VENDOR SPECIFIC]
     //Insert vendor specific clock crossing register slice here
-    //   - Input interface is net_iso_sync_ctrl_*, sync to ctrl_aclk
-    //   - Output interface is net_iso_ctrl_*, sync to axis_aclk
+    //   - Input interface is net_iso_sync_ctrl_0_*, sync to ctrl_aclk
+    //   - Output interface is net_iso_ctrl_0_*, sync to axis_aclk
     axi_lite_clock_cross net_iso_clock_cross 
     (
       .s_axi_aclk(ctrl_aclk),        // input wire s_axi_aclk
       .s_axi_aresetn(ctrl_aresetn),  // input wire s_axi_aresetn
 
-      .s_axi_awaddr(net_iso_sync_ctrl_awaddr),    // input wire [11 : 0] s_axi_awaddr
+      .s_axi_awaddr(net_iso_sync_ctrl_0_awaddr),    // input wire [11 : 0] s_axi_awaddr
       .s_axi_awprot(0),                           // input wire [2 : 0] s_axi_awprot
-      .s_axi_awvalid(net_iso_sync_ctrl_awvalid),  // input wire s_axi_awvalid
-      .s_axi_awready(net_iso_sync_ctrl_awready),  // output wire s_axi_awready
-      .s_axi_wdata(net_iso_sync_ctrl_wdata),      // input wire [31 : 0] s_axi_wdata
+      .s_axi_awvalid(net_iso_sync_ctrl_0_awvalid),  // input wire s_axi_awvalid
+      .s_axi_awready(net_iso_sync_ctrl_0_awready),  // output wire s_axi_awready
+      .s_axi_wdata(net_iso_sync_ctrl_0_wdata),      // input wire [31 : 0] s_axi_wdata
       .s_axi_wstrb(0),                            // input wire [3 : 0] s_axi_wstrb
-      .s_axi_wvalid(net_iso_sync_ctrl_wvalid),    // input wire s_axi_wvalid
-      .s_axi_wready(net_iso_sync_ctrl_wready),    // output wire s_axi_wready
-      .s_axi_bresp(net_iso_sync_ctrl_bresp),      // output wire [1 : 0] s_axi_bresp
-      .s_axi_bvalid(net_iso_sync_ctrl_bvalid),    // output wire s_axi_bvalid
-      .s_axi_bready(net_iso_sync_ctrl_bready),    // input wire s_axi_bready
-      .s_axi_araddr(net_iso_sync_ctrl_araddr),    // input wire [11 : 0] s_axi_araddr
+      .s_axi_wvalid(net_iso_sync_ctrl_0_wvalid),    // input wire s_axi_wvalid
+      .s_axi_wready(net_iso_sync_ctrl_0_wready),    // output wire s_axi_wready
+      .s_axi_bresp(net_iso_sync_ctrl_0_bresp),      // output wire [1 : 0] s_axi_bresp
+      .s_axi_bvalid(net_iso_sync_ctrl_0_bvalid),    // output wire s_axi_bvalid
+      .s_axi_bready(net_iso_sync_ctrl_0_bready),    // input wire s_axi_bready
+      .s_axi_araddr(net_iso_sync_ctrl_0_araddr),    // input wire [11 : 0] s_axi_araddr
       .s_axi_arprot(0),                           // input wire [2 : 0] s_axi_arprot
-      .s_axi_arvalid(net_iso_sync_ctrl_arvalid),  // input wire s_axi_arvalid
-      .s_axi_arready(net_iso_sync_ctrl_arready),  // output wire s_axi_arready
-      .s_axi_rdata(net_iso_sync_ctrl_rdata),      // output wire [31 : 0] s_axi_rdata
-      .s_axi_rresp(net_iso_sync_ctrl_rresp),      // output wire [1 : 0] s_axi_rresp
-      .s_axi_rvalid(net_iso_sync_ctrl_rvalid),    // output wire s_axi_rvalid
-      .s_axi_rready(net_iso_sync_ctrl_rready),    // input wire s_axi_rready
+      .s_axi_arvalid(net_iso_sync_ctrl_0_arvalid),  // input wire s_axi_arvalid
+      .s_axi_arready(net_iso_sync_ctrl_0_arready),  // output wire s_axi_arready
+      .s_axi_rdata(net_iso_sync_ctrl_0_rdata),      // output wire [31 : 0] s_axi_rdata
+      .s_axi_rresp(net_iso_sync_ctrl_0_rresp),      // output wire [1 : 0] s_axi_rresp
+      .s_axi_rvalid(net_iso_sync_ctrl_0_rvalid),    // output wire s_axi_rvalid
+      .s_axi_rready(net_iso_sync_ctrl_0_rready),    // input wire s_axi_rready
 
       .m_axi_aclk(axis_aclk),        // input wire m_axi_aclk
       .m_axi_aresetn(axis_aresetn),  // input wire m_axi_aresetn
 
-      .m_axi_awaddr(net_iso_ctrl_awaddr),    // output wire [11 : 0] m_axi_awaddr
+      .m_axi_awaddr(net_iso_ctrl_0_awaddr),    // output wire [11 : 0] m_axi_awaddr
       .m_axi_awprot( ),                      // output wire [2 : 0] m_axi_awprot
-      .m_axi_awvalid(net_iso_ctrl_awvalid),  // output wire m_axi_awvalid
-      .m_axi_awready(net_iso_ctrl_awready),  // input wire m_axi_awready
-      .m_axi_wdata(net_iso_ctrl_wdata),      // output wire [31 : 0] m_axi_wdata
+      .m_axi_awvalid(net_iso_ctrl_0_awvalid),  // output wire m_axi_awvalid
+      .m_axi_awready(net_iso_ctrl_0_awready),  // input wire m_axi_awready
+      .m_axi_wdata(net_iso_ctrl_0_wdata),      // output wire [31 : 0] m_axi_wdata
       .m_axi_wstrb( ),                       // output wire [3 : 0] m_axi_wstrb
-      .m_axi_wvalid(net_iso_ctrl_wvalid),    // output wire m_axi_wvalid
-      .m_axi_wready(net_iso_ctrl_wready),    // input wire m_axi_wready
-      .m_axi_bresp(net_iso_ctrl_bresp),      // input wire [1 : 0] m_axi_bresp
-      .m_axi_bvalid(net_iso_ctrl_bvalid),    // input wire m_axi_bvalid
-      .m_axi_bready(net_iso_ctrl_bready),    // output wire m_axi_bready
-      .m_axi_araddr(net_iso_ctrl_araddr),    // output wire [11 : 0] m_axi_araddr
+      .m_axi_wvalid(net_iso_ctrl_0_wvalid),    // output wire m_axi_wvalid
+      .m_axi_wready(net_iso_ctrl_0_wready),    // input wire m_axi_wready
+      .m_axi_bresp(net_iso_ctrl_0_bresp),      // input wire [1 : 0] m_axi_bresp
+      .m_axi_bvalid(net_iso_ctrl_0_bvalid),    // input wire m_axi_bvalid
+      .m_axi_bready(net_iso_ctrl_0_bready),    // output wire m_axi_bready
+      .m_axi_araddr(net_iso_ctrl_0_araddr),    // output wire [11 : 0] m_axi_araddr
       .m_axi_arprot( ),                      // output wire [2 : 0] m_axi_arprot
-      .m_axi_arvalid(net_iso_ctrl_arvalid),  // output wire m_axi_arvalid
-      .m_axi_arready(net_iso_ctrl_arready),  // input wire m_axi_arready
-      .m_axi_rdata(net_iso_ctrl_rdata),      // input wire [31 : 0] m_axi_rdata
-      .m_axi_rresp(net_iso_ctrl_rresp),      // input wire [1 : 0] m_axi_rresp
-      .m_axi_rvalid(net_iso_ctrl_rvalid),    // input wire m_axi_rvalid
-      .m_axi_rready(net_iso_ctrl_rready)    // output wire m_axi_rready
+      .m_axi_arvalid(net_iso_ctrl_0_arvalid),  // output wire m_axi_arvalid
+      .m_axi_arready(net_iso_ctrl_0_arready),  // input wire m_axi_arready
+      .m_axi_rdata(net_iso_ctrl_0_rdata),      // input wire [31 : 0] m_axi_rdata
+      .m_axi_rresp(net_iso_ctrl_0_rresp),      // input wire [1 : 0] m_axi_rresp
+      .m_axi_rvalid(net_iso_ctrl_0_rvalid),    // input wire m_axi_rvalid
+      .m_axi_rready(net_iso_ctrl_0_rready)    // output wire m_axi_rready
+    );
+
+
+
+    //--------------------------------------------------------//
+    //   Network connection 1                                 //
+    //--------------------------------------------------------//
+
+    //Control interface for network isolation cores (sync to net clock)
+    //Write Address Channel  
+    wire [31:0]     net_iso_ctrl_1_awaddr;
+    wire            net_iso_ctrl_1_awvalid;
+    wire            net_iso_ctrl_1_awready;
+    //Write Data Channel
+    wire  [31:0]    net_iso_ctrl_1_wdata;
+    wire            net_iso_ctrl_1_wvalid;
+    wire            net_iso_ctrl_1_wready;
+    //Write Response Channel
+    wire [1:0]      net_iso_ctrl_1_bresp;
+    wire            net_iso_ctrl_1_bvalid;
+    wire            net_iso_ctrl_1_bready;
+    //Read Address Channel 
+    wire  [31:0]    net_iso_ctrl_1_araddr;
+    wire            net_iso_ctrl_1_arvalid;
+    wire            net_iso_ctrl_1_arready;
+    //Read Data Response Channel
+    wire [31:0]     net_iso_ctrl_1_rdata;
+    wire [1:0]      net_iso_ctrl_1_rresp;
+    wire            net_iso_ctrl_1_rvalid;
+    wire            net_iso_ctrl_1_rready;
+
+    //The network isolation wrapper
+    net_iso_top
+    #(
+        .AXIS_BUS_WIDTH                     (NET_AXIS_BUS_WIDTH),
+        .AXIS_ID_WIDTH                      (NET_AXIS_ID_WIDTH),
+        .AXIS_DEST_WIDTH                    (NET_AXIS_DEST_WIDTH),
+        .MAX_PACKET_LENGTH                  (NET_MAX_PACKET_LENGTH),
+        .INCLUDE_BW_SHAPER                  (NET_INCLUDE_BW_SHAPER),
+        .DISALLOW_INGR_BACKPRESSURE         (NET_DISALLOW_INGR_BACKPRESSURE),
+        .DISALLOW_INVALID_MID_PACKET_EGR    (NET_DISALLOW_INVALID_MID_PACKET_EGR),
+        .INCLUDE_TIMEOUT_ERROR_INGR         (NET_INCLUDE_TIMEOUT_ERROR_INGR),
+        .INGR_TIMEOUT_CYCLES                (NET_INGR_TIMEOUT_CYCLES),
+        .TOKEN_COUNT_INT_WIDTH              (NET_TOKEN_COUNT_INT_WIDTH),
+        .TOKEN_COUNT_FRAC_WIDTH             (NET_TOKEN_COUNT_FRAC_WIDTH)
+    )
+    net_1_iso_inst
+    (
+        //Egress Input AXI stream (the master interface to isolate connects to this)
+        .axis_tx_s_tdata        (axis_tx_1_s_tdata),
+        .axis_tx_s_tid          (axis_tx_1_s_tid),
+        .axis_tx_s_tdest        (axis_tx_1_s_tdest),                                          
+        .axis_tx_s_tkeep        (axis_tx_1_s_tkeep),
+        .axis_tx_s_tlast        (axis_tx_1_s_tlast),
+        .axis_tx_s_tvalid       (axis_tx_1_s_tvalid),
+        .axis_tx_s_tready       (axis_tx_1_s_tready),
+
+        //Egress Output AXI stream (connects to the slave expecting the isolated signal)
+        .axis_tx_m_tdata        (axis_tx_1_m_tdata),
+        .axis_tx_m_tid          (axis_tx_1_m_tid),
+        .axis_tx_m_tdest        (axis_tx_1_m_tdest),                                           
+        .axis_tx_m_tkeep        (axis_tx_1_m_tkeep),
+        .axis_tx_m_tlast        (axis_tx_1_m_tlast),
+        .axis_tx_m_tvalid       (axis_tx_1_m_tvalid),
+        .axis_tx_m_tready       (axis_tx_1_m_tready),
+
+        //Ingress Input AXI stream (connects to the master expecting the isolated signal)
+        .axis_rx_s_tdata        (axis_rx_1_s_tdata),
+        .axis_rx_s_tdest        (axis_rx_1_s_tdest),
+        .axis_rx_s_tkeep        (axis_rx_1_s_tkeep),
+        .axis_rx_s_tlast        (axis_rx_1_s_tlast),
+        .axis_rx_s_tvalid       (axis_rx_1_s_tvalid),
+        .axis_rx_s_tready       (axis_rx_1_s_tready),
+
+        //Ingress Output AXI stream (the slave interface to isolate connects to this)
+        .axis_rx_m_tdata        (axis_rx_1_m_tdata),
+        .axis_rx_m_tdest        (axis_rx_1_m_tdest),
+        .axis_rx_m_tkeep        (axis_rx_1_m_tkeep),
+        .axis_rx_m_tlast        (axis_rx_1_m_tlast),
+        .axis_rx_m_tvalid       (axis_rx_1_m_tvalid),
+        .axis_rx_m_tready       (axis_rx_1_m_tready),
+        
+        //The AXI-Lite Control Interface
+        .ctrl_awaddr            (net_iso_ctrl_1_awaddr),
+        .ctrl_awvalid           (net_iso_ctrl_1_awvalid),
+        .ctrl_awready           (net_iso_ctrl_1_awready),
+        .ctrl_wdata             (net_iso_ctrl_1_wdata),
+        .ctrl_wvalid            (net_iso_ctrl_1_wvalid),
+        .ctrl_wready            (net_iso_ctrl_1_wready),
+        .ctrl_bresp             (net_iso_ctrl_1_bresp),
+        .ctrl_bvalid            (net_iso_ctrl_1_bvalid),
+        .ctrl_bready            (net_iso_ctrl_1_bready),
+        .ctrl_araddr            (net_iso_ctrl_1_araddr),
+        .ctrl_arvalid           (net_iso_ctrl_1_arvalid),
+        .ctrl_arready           (net_iso_ctrl_1_arready),
+        .ctrl_rdata             (net_iso_ctrl_1_rdata),
+        .ctrl_rresp             (net_iso_ctrl_1_rresp),
+        .ctrl_rvalid            (net_iso_ctrl_1_rvalid),
+        .ctrl_rready            (net_iso_ctrl_1_rready),
+
+        //Clocking
+        .aclk                   (axis_aclk),
+        .aresetn                (axis_aresetn)
+    );
+
+    //Control interface for network isolation cores (sync to ctrl clock)
+    //Write Address Channel  
+    wire [31:0]     net_iso_sync_ctrl_1_awaddr;
+    wire            net_iso_sync_ctrl_1_awvalid;
+    wire            net_iso_sync_ctrl_1_awready;
+    //Write Data Channel
+    wire  [31:0]    net_iso_sync_ctrl_1_wdata;
+    wire            net_iso_sync_ctrl_1_wvalid;
+    wire            net_iso_sync_ctrl_1_wready;
+    //Write Response Channel
+    wire [1:0]      net_iso_sync_ctrl_1_bresp;
+    wire            net_iso_sync_ctrl_1_bvalid;
+    wire            net_iso_sync_ctrl_1_bready;
+    //Read Address Channel 
+    wire  [31:0]    net_iso_sync_ctrl_1_araddr;
+    wire            net_iso_sync_ctrl_1_arvalid;
+    wire            net_iso_sync_ctrl_1_arready;
+    //Read Data Response Channel
+    wire [31:0]     net_iso_sync_ctrl_1_rdata;
+    wire [1:0]      net_iso_sync_ctrl_1_rresp;
+    wire            net_iso_sync_ctrl_1_rvalid;
+    wire            net_iso_sync_ctrl_1_rready;
+
+    //[VENDOR SPECIFIC]
+    //Insert vendor specific clock crossing register slice here
+    //   - Input interface is net_iso_sync_ctrl_1_*, sync to ctrl_aclk
+    //   - Output interface is net_iso_ctrl_1_*, sync to axis_aclk
+    axi_lite_clock_cross net_iso_clock_cross 
+    (
+      .s_axi_aclk(ctrl_aclk),        // input wire s_axi_aclk
+      .s_axi_aresetn(ctrl_aresetn),  // input wire s_axi_aresetn
+
+      .s_axi_awaddr(net_iso_sync_ctrl_1_awaddr),    // input wire [11 : 0] s_axi_awaddr
+      .s_axi_awprot(0),                           // input wire [2 : 0] s_axi_awprot
+      .s_axi_awvalid(net_iso_sync_ctrl_1_awvalid),  // input wire s_axi_awvalid
+      .s_axi_awready(net_iso_sync_ctrl_1_awready),  // output wire s_axi_awready
+      .s_axi_wdata(net_iso_sync_ctrl_1_wdata),      // input wire [31 : 0] s_axi_wdata
+      .s_axi_wstrb(0),                            // input wire [3 : 0] s_axi_wstrb
+      .s_axi_wvalid(net_iso_sync_ctrl_1_wvalid),    // input wire s_axi_wvalid
+      .s_axi_wready(net_iso_sync_ctrl_1_wready),    // output wire s_axi_wready
+      .s_axi_bresp(net_iso_sync_ctrl_1_bresp),      // output wire [1 : 0] s_axi_bresp
+      .s_axi_bvalid(net_iso_sync_ctrl_1_bvalid),    // output wire s_axi_bvalid
+      .s_axi_bready(net_iso_sync_ctrl_1_bready),    // input wire s_axi_bready
+      .s_axi_araddr(net_iso_sync_ctrl_1_araddr),    // input wire [11 : 0] s_axi_araddr
+      .s_axi_arprot(0),                           // input wire [2 : 0] s_axi_arprot
+      .s_axi_arvalid(net_iso_sync_ctrl_1_arvalid),  // input wire s_axi_arvalid
+      .s_axi_arready(net_iso_sync_ctrl_1_arready),  // output wire s_axi_arready
+      .s_axi_rdata(net_iso_sync_ctrl_1_rdata),      // output wire [31 : 0] s_axi_rdata
+      .s_axi_rresp(net_iso_sync_ctrl_1_rresp),      // output wire [1 : 0] s_axi_rresp
+      .s_axi_rvalid(net_iso_sync_ctrl_1_rvalid),    // output wire s_axi_rvalid
+      .s_axi_rready(net_iso_sync_ctrl_1_rready),    // input wire s_axi_rready
+
+      .m_axi_aclk(axis_aclk),        // input wire m_axi_aclk
+      .m_axi_aresetn(axis_aresetn),  // input wire m_axi_aresetn
+
+      .m_axi_awaddr(net_iso_ctrl_1_awaddr),    // output wire [11 : 0] m_axi_awaddr
+      .m_axi_awprot( ),                      // output wire [2 : 0] m_axi_awprot
+      .m_axi_awvalid(net_iso_ctrl_1_awvalid),  // output wire m_axi_awvalid
+      .m_axi_awready(net_iso_ctrl_1_awready),  // input wire m_axi_awready
+      .m_axi_wdata(net_iso_ctrl_1_wdata),      // output wire [31 : 0] m_axi_wdata
+      .m_axi_wstrb( ),                       // output wire [3 : 0] m_axi_wstrb
+      .m_axi_wvalid(net_iso_ctrl_1_wvalid),    // output wire m_axi_wvalid
+      .m_axi_wready(net_iso_ctrl_1_wready),    // input wire m_axi_wready
+      .m_axi_bresp(net_iso_ctrl_1_bresp),      // input wire [1 : 0] m_axi_bresp
+      .m_axi_bvalid(net_iso_ctrl_1_bvalid),    // input wire m_axi_bvalid
+      .m_axi_bready(net_iso_ctrl_1_bready),    // output wire m_axi_bready
+      .m_axi_araddr(net_iso_ctrl_1_araddr),    // output wire [11 : 0] m_axi_araddr
+      .m_axi_arprot( ),                      // output wire [2 : 0] m_axi_arprot
+      .m_axi_arvalid(net_iso_ctrl_1_arvalid),  // output wire m_axi_arvalid
+      .m_axi_arready(net_iso_ctrl_1_arready),  // input wire m_axi_arready
+      .m_axi_rdata(net_iso_ctrl_1_rdata),      // input wire [31 : 0] m_axi_rdata
+      .m_axi_rresp(net_iso_ctrl_1_rresp),      // input wire [1 : 0] m_axi_rresp
+      .m_axi_rvalid(net_iso_ctrl_1_rvalid),    // input wire m_axi_rvalid
+      .m_axi_rready(net_iso_ctrl_1_rready)    // output wire m_axi_rready
     );
         
 
@@ -587,6 +801,7 @@ module interface_shell
         .axi_lite_m_rvalid(ctrl_iso_ctrl_rvalid),   
         .axi_lite_m_rready(ctrl_iso_ctrl_rready)   
     );
+
 
 
 
@@ -803,16 +1018,17 @@ module interface_shell
     //   - Output slave interfaces are
     //      - axi_lite_s_ctrl_* (connnects to ctrl isolation), with address width 32
     //      - net_iso_sync_ctrl_* (connects to net isolation, through async reg slice), with address width 32
-    //      - ctrl_iso_reg_ctrl_* (connect to ctrl isolation, through register slice), with address width 32
-    //      - clock_decouple_reg_ctrl_* (connects to clock decouple controller, through register slice), with address width 32
+    //      - ctrl_iso_rge_ctrl_* (connect to ctrl isolation), with address width 32
+    //      - clock_decouple_reg_ctrl_* (connects to clock decouple controller), with address width 32
     //   - Note, other than the axi_lite_s, slave interfaces do not have wstrb signal
     //   - all signals synchronous to ctrl_aclk
 
+    wire [3:0] axi_s4_wstrb_pad;
     wire [3:0] axi_s3_wstrb_pad;
     wire [3:0] axi_s2_wstrb_pad;
     wire [3:0] axi_s1_wstrb_pad;
 
-    intfc_axi_lite_crossbar axi_lite_xbar_inst 
+    intfc_axi_lite_crossbar axi_lite_xbar_inst //TODO - update xci
     (
       .aclk(ctrl_aclk),                    // input wire aclk
       .aresetn(ctrl_aresetn),              // input wire aresetn
@@ -839,73 +1055,90 @@ module interface_shell
       
       .m_axi_awaddr({   clock_decouple_reg_ctrl_awaddr,
                         ctrl_iso_reg_ctrl_awaddr,
-                        net_iso_sync_ctrl_awaddr,
+                        net_iso_sync_ctrl_1_awaddr
+                        net_iso_sync_ctrl_0_awaddr,
                         axi_lite_s_ctrl_awaddr }),    // output wire [104 : 0] m_axi_awaddr
       .m_axi_awprot( ),                       // output wire [14 : 0] m_axi_awprot
       .m_axi_awvalid({  clock_decouple_reg_ctrl_awvalid,
                         ctrl_iso_reg_ctrl_awvalid,
-                        net_iso_sync_ctrl_awvalid,
+                        net_iso_sync_ctrl_1_awvalid
+                        net_iso_sync_ctrl_0_awvalid,
                         axi_lite_s_ctrl_awvalid }),  // output wire [4 : 0] m_axi_awvalid
       .m_axi_awready({  clock_decouple_reg_ctrl_awready,
                         ctrl_iso_reg_ctrl_awready,
-                        net_iso_sync_ctrl_awready,
+                        net_iso_sync_ctrl_1_awready
+                        net_iso_sync_ctrl_0_awready,
                         axi_lite_s_ctrl_awready }),  // input wire [4 : 0] m_axi_awready
       .m_axi_wdata({    clock_decouple_reg_ctrl_wdata,
                         ctrl_iso_reg_ctrl_wdata,
-                        net_iso_sync_ctrl_wdata,
+                        net_iso_sync_ctrl_1_wdata
+                        net_iso_sync_ctrl_0_wdata,
                         axi_lite_s_ctrl_wdata }),      // output wire [159 : 0] m_axi_wdata
       .m_axi_wstrb({    axi_s3_wstrb_pad,
+                        axi_s3_wstrb_pad,
                         axi_s2_wstrb_pad,
                         axi_s1_wstrb_pad,
                         axi_lite_s_ctrl_wstrb }),      // output wire [19 : 0] m_axi_wstrb
       .m_axi_wvalid({   clock_decouple_reg_ctrl_wvalid,
                         ctrl_iso_reg_ctrl_wvalid,
-                        net_iso_sync_ctrl_wvalid,
+                        net_iso_sync_ctrl_1_wvalid
+                        net_iso_sync_ctrl_0_wvalid,
                         axi_lite_s_ctrl_wvalid }),    // output wire [4 : 0] m_axi_wvalid
       .m_axi_wready({   clock_decouple_reg_ctrl_wready,
                         ctrl_iso_reg_ctrl_wready,
-                        net_iso_sync_ctrl_wready,
+                        net_iso_sync_ctrl_1_wready
+                        net_iso_sync_ctrl_0_wready,
                         axi_lite_s_ctrl_wready }),    // input wire [4 : 0] m_axi_wready
       .m_axi_bresp({    clock_decouple_reg_ctrl_bresp,
                         ctrl_iso_reg_ctrl_bresp,
-                        net_iso_sync_ctrl_bresp,
+                        net_iso_sync_ctrl_1_bresp
+                        net_iso_sync_ctrl_0_bresp,
                         axi_lite_s_ctrl_bresp }),      // input wire [9 : 0] m_axi_bresp
       .m_axi_bvalid({   clock_decouple_reg_ctrl_bvalid,
                         ctrl_iso_reg_ctrl_bvalid,
-                        net_iso_sync_ctrl_bvalid,
+                        net_iso_sync_ctrl_1_bvalid
+                        net_iso_sync_ctrl_0_bvalid,
                         axi_lite_s_ctrl_bvalid }),    // input wire [4 : 0] m_axi_bvalid
       .m_axi_bready({   clock_decouple_reg_ctrl_bready,
                         ctrl_iso_reg_ctrl_bready,
-                        net_iso_sync_ctrl_bready,
+                        net_iso_sync_ctrl_1_bready
+                        net_iso_sync_ctrl_0_bready,
                         axi_lite_s_ctrl_bready }),    // output wire [4 : 0] m_axi_bready
       .m_axi_araddr({   clock_decouple_reg_ctrl_araddr,
                         ctrl_iso_reg_ctrl_araddr,
-                        net_iso_sync_ctrl_araddr,
+                        net_iso_sync_ctrl_1_araddr
+                        net_iso_sync_ctrl_0_araddr,
                         axi_lite_s_ctrl_araddr }),    // output wire [104 : 0] m_axi_araddr
       .m_axi_arprot( ),                       // output wire [14 : 0] m_axi_arprot
       .m_axi_arvalid({  clock_decouple_reg_ctrl_arvalid,
                         ctrl_iso_reg_ctrl_arvalid,
-                        net_iso_sync_ctrl_arvalid,
+                        net_iso_sync_ctrl_1_arvalid
+                        net_iso_sync_ctrl_0_arvalid,
                         axi_lite_s_ctrl_arvalid }),  // output wire [4 : 0] m_axi_arvalid
       .m_axi_arready({  clock_decouple_reg_ctrl_arready,
                         ctrl_iso_reg_ctrl_arready,
-                        net_iso_sync_ctrl_arready,
+                        net_iso_sync_ctrl_1_arready
+                        net_iso_sync_ctrl_0_arready,
                         axi_lite_s_ctrl_arready }),  // input wire [4 : 0] m_axi_arready
       .m_axi_rdata({    clock_decouple_reg_ctrl_rdata,
                         ctrl_iso_reg_ctrl_rdata,
-                        net_iso_sync_ctrl_rdata,
+                        net_iso_sync_ctrl_1_rdata
+                        net_iso_sync_ctrl_0_rdata,
                         axi_lite_s_ctrl_rdata }),      // input wire [159 : 0] m_axi_rdata
       .m_axi_rresp({    clock_decouple_reg_ctrl_rresp,
                         ctrl_iso_reg_ctrl_rresp,
-                        net_iso_sync_ctrl_rresp,
+                        net_iso_sync_ctrl_1_rresp
+                        net_iso_sync_ctrl_0_rresp,
                         axi_lite_s_ctrl_rresp }),      // input wire [9 : 0] m_axi_rresp
       .m_axi_rvalid({   clock_decouple_reg_ctrl_rvalid,
                         ctrl_iso_reg_ctrl_rvalid,
-                        net_iso_sync_ctrl_rvalid,
+                        net_iso_sync_ctrl_1_rvalid
+                        net_iso_sync_ctrl_0_rvalid,
                         axi_lite_s_ctrl_rvalid }),    // input wire [4 : 0] m_axi_rvalid
       .m_axi_rready({   clock_decouple_reg_ctrl_rready,
                         ctrl_iso_reg_ctrl_rready,
-                        net_iso_sync_ctrl_rready,
+                        net_iso_sync_ctrl_1_rready
+                        net_iso_sync_ctrl_0_rready,
                         axi_lite_s_ctrl_rready })    // output wire [4 : 0] m_axi_rready
     );
 
